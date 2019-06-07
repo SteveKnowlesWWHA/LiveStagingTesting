@@ -1,0 +1,2027 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/7/2019 2:20:19 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{5C410F26-2825-4C07-AFDE-EE84F945A0AF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_DebtBreakDown"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{7EF3AD53-7012-488F-AC0D-8D1E8673DE2E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Debt_BreakDown]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{97A63F27-C017-485D-B0AE-B3E7B5AAC2F1}"
+      DTS:ObjectName="Debt_BreakDown">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\stephen.knowles\Documents\Visual Studio 2015\Projects\LiveStagingTesting\debt-breakdownNA.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Tenancy Ref&quot;"
+              DTS:DTSID="{6FF60572-9587-4C73-9A90-D38DB67E0DAD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Tncy Sts&quot;"
+              DTS:DTSID="{321BD47A-C0BB-417C-AE64-E92569A192D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Tncy Type&quot;"
+              DTS:DTSID="{CD9D0795-F1DD-43E6-B0F1-63F76474372C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Rent Group&quot;"
+              DTS:DTSID="{F50832B0-90A1-4E37-9A80-8722531FAE9E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Arrs Stage&quot;"
+              DTS:DTSID="{E44A4E2E-000D-4F28-9A72-9E05F719EFB6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Net Rent&quot;"
+              DTS:DTSID="{BB47C1FA-4167-4772-9FD0-8D6790244C43}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Gross Rent&quot;"
+              DTS:DTSID="{B7D80068-2D1D-4213-BDE2-0F7EA92033D3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Primary Arrs&quot;"
+              DTS:DTSID="{6327F8CA-9F87-41DA-A5F3-60ED7B9C2696}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Unpaid HB&quot;"
+              DTS:DTSID="{87B975A9-2F5A-4A3F-A83C-6496904DF4CA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Tenant SP Cont&quot;"
+              DTS:DTSID="{DFB9EA7D-52B0-494E-9064-FCAE68001207}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Est SP Grant&quot;"
+              DTS:DTSID="{FF8CAFB5-CE17-4373-92DA-207D1713F7A5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Other PSP Arrs&quot;"
+              DTS:DTSID="{99198ED1-53F6-4E30-AF75-D79742438767}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Sec Arrears&quot;"
+              DTS:DTSID="{30A94326-D54E-4BC0-B06A-D7FA51A97FAB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Other Sec Arrs&quot;"
+              DTS:DTSID="{909A30F3-B0F3-4C0E-95D1-A0B8E69DD080}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Sundry Debt&quot;"
+              DTS:DTSID="{25CE9AA2-EAD5-401D-A0DF-86BA51013DB6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Unalloc Inc&quot;"
+              DTS:DTSID="{0453130D-5535-4007-B9A6-96297616D7E6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Total Tncy Debt&quot;"
+              DTS:DTSID="{FC542C7F-2B46-4324-B3CE-5BB7A221ADC6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;MOP&quot;"
+              DTS:DTSID="{B512FE3B-B30E-427C-A2A0-90EE73780552}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Scheme&quot;"
+              DTS:DTSID="{E486A8E0-013E-4CC2-97E4-1F58E0F0BFA7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Mgt Area&quot;"
+              DTS:DTSID="{582826CD-1AD6-4DFD-9D59-D410F6CC646B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Location Ref&quot;"
+              DTS:DTSID="{C6F86942-980A-4624-A4BF-67F749FD76B3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Arrs Officer&quot;"
+              DTS:DTSID="{E12A99EF-3CBD-446E-8561-3A5AFFCF2BA7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Prev Arrs Stage&quot;"
+              DTS:DTSID="{839A2AF5-D761-4BDD-BC2F-8F6267E99E1B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Court Entry Fee&quot;"
+              DTS:DTSID="{3F3097AC-C4F9-4812-8A78-D7BCFA0F8166}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Court Warrrant&quot;"
+              DTS:DTSID="{E24C38F2-7996-4AA1-955A-446DAC09938F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Major Repair Recharge&quot;"
+              DTS:DTSID="{0031BCC1-80D2-4A49-8191-D176C6451249}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Repairs Recharge&quot;"
+              DTS:DTSID="{09BA48B0-D7A7-488F-AB9A-F9103481A859}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Other SD&quot;"
+              DTS:DTSID="{066A8C79-072D-4A43-9AA9-35F00D3EABAC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;SD Bfwd&quot;"
+              DTS:DTSID="{D9CCD51C-DD4F-47FF-A7E4-D656BAB671DF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Weeks in Arrears&quot;"
+              DTS:DTSID="{CBDE0F9B-0BAA-454C-ACE2-A3DC0538A770}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Gross Arrears&quot;"
+              DTS:DTSID="{D8473CF2-1A49-4B8E-A9A6-FB90403E8FA8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Insight\Insight.livedynamics]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{840330C1-45A4-4DB8-902A-A679A1073EC3}"
+      DTS:ObjectName="Insight\Insight.livedynamics">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=Insight\Insight;Initial Catalog=livedynamics;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SourceConnectionFlatFile_Debt_BreakDown]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{009F5299-030F-4F59-804A-BE44B62C9BAA}"
+      DTS:ObjectName="SourceConnectionFlatFile_Debt_BreakDown">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\ibsapp\Code\Live\Standard Extracts\debt-breakdown.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tenancy Ref"
+              DTS:DTSID="{241E027D-39B9-4A40-B16B-624116FE5736}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tncy Sts"
+              DTS:DTSID="{99541E5B-429F-4FBE-B678-4570FCCBD9BD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tncy Type"
+              DTS:DTSID="{9B3FF784-0188-4792-830C-D3B269FB1A5B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Rent Group"
+              DTS:DTSID="{E228D382-92AD-4BA0-97C7-99FFBBAA427C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Arrs Stage"
+              DTS:DTSID="{700446C3-4D8A-4707-8793-053EBCCAB759}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Net Rent"
+              DTS:DTSID="{7C49B25B-1BEE-4C79-B434-8B7B2E37FEF6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gross Rent"
+              DTS:DTSID="{436C191E-1BCF-4459-80F8-1AFD6A1E0D0F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Primary Arrears"
+              DTS:DTSID="{05DE6DAD-D7B1-47FA-A986-849F8E83FFC5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Unpaid HB"
+              DTS:DTSID="{75EE94EB-0CAA-47FE-9C38-4EF2C5FD4314}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Tenant SP Cont"
+              DTS:DTSID="{B5FE5ECC-460F-4094-A3E5-6614AEFF48B9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Est SP Grant"
+              DTS:DTSID="{3B0F0EC3-33E3-4BEB-BADA-1A3ADE8B0D64}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Other PSP Arrs"
+              DTS:DTSID="{8F4DE23D-E60C-4506-90F0-6C610AE6C79D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Sec Arrears"
+              DTS:DTSID="{58190E12-EDFF-4EEF-930D-5BF0D11AC71A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Other Sec Arrs"
+              DTS:DTSID="{EE0FCEA3-0988-408A-9FA0-4FAEE7B7B7E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Sundry Debt"
+              DTS:DTSID="{96A57395-A23B-4F6A-88FC-CECB55EB6BE9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Unalloc Inc"
+              DTS:DTSID="{28D1A122-D129-4ECB-A7C3-E504F3363619}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Total Tncy Debt"
+              DTS:DTSID="{266A80DF-54DB-4C3D-ADF5-B30CEF43CF8A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MOP"
+              DTS:DTSID="{CC3F87DA-916E-4986-907B-2F49DE88A12D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Scheme"
+              DTS:DTSID="{B3EE00CC-EEAF-4109-A36D-C2A52DF669E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Mgt Area"
+              DTS:DTSID="{B6E6F256-77BF-46D0-8B00-EFD93E49492E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Location Ref"
+              DTS:DTSID="{42DA1977-A73C-4526-9850-C96E1D4AEDB8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Arrs Officer"
+              DTS:DTSID="{F8C688A7-0D5A-4009-97EB-E3994809A68D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Prev Arrs Stage"
+              DTS:DTSID="{2E2BC7CE-3EA2-424D-9DC5-1216E31AD2F8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Court Entry Fee"
+              DTS:DTSID="{98B48690-3864-4079-8933-AC92E5F7376A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Court Warrant"
+              DTS:DTSID="{F8881761-8010-4790-A221-F889D1D81902}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Major Repair Recharge"
+              DTS:DTSID="{AC95EE9F-230D-4636-B7C5-D5D220D27C96}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Repairs Recharge"
+              DTS:DTSID="{0C211D67-91EC-4731-A24A-758339837E77}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Other SD"
+              DTS:DTSID="{1112BBA8-2381-4C9C-879E-76729B3FEEF6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SD Bfwd"
+              DTS:DTSID="{FB3DA2D9-E74D-4B29-8FE8-6A09BBCB1B05}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Weeks in Arrears"
+              DTS:DTSID="{5D5BE281-E451-47FF-9079-C22AC175DB1A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Gross Arrears"
+              DTS:DTSID="{D32D8270-774B-4F53-AD63-EB41EFC29E66}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E274966B-798D-419E-A7BC-039D57340EBC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[debt-breakdown]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Insight\Insight.livedynamics]"
+                  connectionManagerRefId="Package.ConnectionManagers[Insight\Insight.livedynamics]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tenancy Ref]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tenancy Ref" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tncy Sts]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tncy Sts" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tncy Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Tncy Type" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rent Group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Rent Group" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Arrs Stage]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Arrs Stage" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Net Rent]"
+                      dataType="cy"
+                      name="Net Rent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gross Rent]"
+                      dataType="cy"
+                      name="Gross Rent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Primary Arrs]"
+                      dataType="cy"
+                      name="Primary Arrs" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Unpaid HB]"
+                      dataType="cy"
+                      name="Unpaid HB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tenant SP Cont]"
+                      dataType="cy"
+                      name="Tenant SP Cont" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Est SP Grant]"
+                      dataType="cy"
+                      name="Est SP Grant" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Other PSP Arrs]"
+                      dataType="cy"
+                      name="Other PSP Arrs" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sec Arrears]"
+                      dataType="cy"
+                      name="Sec Arrears" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Other Sec Arrs]"
+                      dataType="cy"
+                      name="Other Sec Arrs" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sundry Debt]"
+                      dataType="cy"
+                      name="Sundry Debt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Unalloc Inc]"
+                      dataType="cy"
+                      name="Unalloc Inc" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Total Tncy Debt]"
+                      dataType="cy"
+                      name="Total Tncy Debt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MOP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MOP" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Scheme]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Scheme" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Mgt Area]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Mgt Area" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location Ref]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Location Ref" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Arrs Officer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Arrs Officer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Prev Arrs Stage]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Prev Arrs Stage" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Court Entry Fee]"
+                      dataType="cy"
+                      name="Court Entry Fee" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Court Warrrant]"
+                      dataType="cy"
+                      name="Court Warrrant" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Major Repair Recharge]"
+                      dataType="cy"
+                      name="Major Repair Recharge" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Repairs Recharge]"
+                      dataType="cy"
+                      name="Repairs Recharge" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Other SD]"
+                      dataType="cy"
+                      name="Other SD" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SD Bfwd]"
+                      dataType="cy"
+                      name="SD Bfwd" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Weeks in Arrears]"
+                      dataType="cy"
+                      name="Weeks in Arrears" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gross Arrears]"
+                      dataType="cy"
+                      name="Gross Arrears" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="2057"
+              name="Source - Debt_Breakdown_CSV"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Debt_BreakDown]"
+                  connectionManagerRefId="Package.ConnectionManagers[Debt_BreakDown]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tenancy Ref&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tenancy Ref&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tenancy Ref&quot;]"
+                      name="&quot;Tenancy Ref&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tncy Sts&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tncy Sts&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tncy Sts&quot;]"
+                      name="&quot;Tncy Sts&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tncy Type&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tncy Type&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tncy Type&quot;]"
+                      name="&quot;Tncy Type&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Rent Group&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Rent Group&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Rent Group&quot;]"
+                      name="&quot;Rent Group&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Arrs Stage&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Arrs Stage&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Arrs Stage&quot;]"
+                      name="&quot;Arrs Stage&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Net Rent&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Net Rent&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Net Rent&quot;]"
+                      name="&quot;Net Rent&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Gross Rent&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Gross Rent&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Gross Rent&quot;]"
+                      name="&quot;Gross Rent&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Primary Arrs&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Primary Arrs&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Primary Arrs&quot;]"
+                      name="&quot;Primary Arrs&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Unpaid HB&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Unpaid HB&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Unpaid HB&quot;]"
+                      name="&quot;Unpaid HB&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tenant SP Cont&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tenant SP Cont&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tenant SP Cont&quot;]"
+                      name="&quot;Tenant SP Cont&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Est SP Grant&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Est SP Grant&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Est SP Grant&quot;]"
+                      name="&quot;Est SP Grant&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other PSP Arrs&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Other PSP Arrs&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other PSP Arrs&quot;]"
+                      name="&quot;Other PSP Arrs&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Sec Arrears&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Sec Arrears&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Sec Arrears&quot;]"
+                      name="&quot;Sec Arrears&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other Sec Arrs&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Other Sec Arrs&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other Sec Arrs&quot;]"
+                      name="&quot;Other Sec Arrs&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Sundry Debt&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Sundry Debt&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Sundry Debt&quot;]"
+                      name="&quot;Sundry Debt&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Unalloc Inc&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Unalloc Inc&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Unalloc Inc&quot;]"
+                      name="&quot;Unalloc Inc&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Total Tncy Debt&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Total Tncy Debt&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Total Tncy Debt&quot;]"
+                      name="&quot;Total Tncy Debt&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;MOP&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;MOP&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;MOP&quot;]"
+                      name="&quot;MOP&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Scheme&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Scheme&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Scheme&quot;]"
+                      name="&quot;Scheme&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Mgt Area&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Mgt Area&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Mgt Area&quot;]"
+                      name="&quot;Mgt Area&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Location Ref&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Location Ref&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Location Ref&quot;]"
+                      name="&quot;Location Ref&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Arrs Officer&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Arrs Officer&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Arrs Officer&quot;]"
+                      name="&quot;Arrs Officer&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Prev Arrs Stage&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Prev Arrs Stage&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Prev Arrs Stage&quot;]"
+                      name="&quot;Prev Arrs Stage&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Court Entry Fee&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Court Entry Fee&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Court Entry Fee&quot;]"
+                      name="&quot;Court Entry Fee&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Court Warrrant&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Court Warrrant&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Court Warrrant&quot;]"
+                      name="&quot;Court Warrrant&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Major Repair Recharge&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Major Repair Recharge&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Major Repair Recharge&quot;]"
+                      name="&quot;Major Repair Recharge&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Repairs Recharge&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Repairs Recharge&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Repairs Recharge&quot;]"
+                      name="&quot;Repairs Recharge&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other SD&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Other SD&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other SD&quot;]"
+                      name="&quot;Other SD&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;SD Bfwd&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;SD Bfwd&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;SD Bfwd&quot;]"
+                      name="&quot;SD Bfwd&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Weeks in Arrears&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Weeks in Arrears&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Weeks in Arrears&quot;]"
+                      name="&quot;Weeks in Arrears&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Gross Arrears&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Gross Arrears&quot;]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Gross Arrears&quot;]"
+                      name="&quot;Gross Arrears&quot;"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tenancy Ref&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Tenancy Ref&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tncy Sts&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Tncy Sts&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tncy Type&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Tncy Type&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Rent Group&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Rent Group&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Arrs Stage&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Arrs Stage&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Net Rent&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Net Rent&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Gross Rent&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Gross Rent&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Primary Arrs&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Primary Arrs&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Unpaid HB&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Unpaid HB&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Tenant SP Cont&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Tenant SP Cont&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Est SP Grant&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Est SP Grant&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Other PSP Arrs&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Other PSP Arrs&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Sec Arrears&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Sec Arrears&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Other Sec Arrs&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Other Sec Arrs&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Sundry Debt&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Sundry Debt&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Unalloc Inc&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Unalloc Inc&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Total Tncy Debt&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Total Tncy Debt&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;MOP&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;MOP&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Scheme&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Scheme&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Mgt Area&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Mgt Area&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Location Ref&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Location Ref&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Arrs Officer&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Arrs Officer&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Prev Arrs Stage&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Prev Arrs Stage&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Court Entry Fee&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Court Entry Fee&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Court Warrrant&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Court Warrrant&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Major Repair Recharge&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Major Repair Recharge&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Repairs Recharge&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Repairs Recharge&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Other SD&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Other SD&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;SD Bfwd&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;SD Bfwd&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Weeks in Arrears&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Weeks in Arrears&quot;" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].ExternalColumns[&quot;Gross Arrears&quot;]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="&quot;Gross Arrears&quot;" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Flat File Source Output]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Debt_BreakDown Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Rename current table add KEEP to archive data"
+      DTS:DTSID="{795E2E6F-BD33-4159-A0D7-1E4430E3EF20}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Debt_BreakDown Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Archive - Rename Debt-Breakdown to recreate ***/&#xA;use livedynamics; &#xA;&#xA;DROP TABLE [dbo].[debt-breakdownKEEP] &#xA;EXEC sp_rename [debt-breakdown],[debt-breakdownKEEP]; &#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Preparation SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Creates new Debt BreakDown table"
+      DTS:DTSID="{C13EB551-119D-41E8-8CF5-901206D2C587}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Preparation SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="CREATE TABLE [dbo].[debt-breakdown] (&#xA;[Tenancy Ref] varchar(50),&#xA;[Tncy Sts] varchar(50),&#xA;[Tncy Type] varchar(50),&#xA;[Rent Group] varchar(50),&#xA;[Arrs Stage] varchar(50),&#xA;[Net Rent] money,&#xA;[Gross Rent] money,&#xA;[Primary Arrs] money,&#xA;[Unpaid HB] money,&#xA;[Tenant SP Cont] money,&#xA;[Est SP Grant] money,&#xA;[Other PSP Arrs] money,&#xA;[Sec Arrears] money,&#xA;[Other Sec Arrs] money,&#xA;[Sundry Debt] money,&#xA;[Unalloc Inc] money,&#xA;[Total Tncy Debt] money,&#xA;[MOP] varchar(50),&#xA;[Scheme] varchar(50),&#xA;[Mgt Area] varchar(50),&#xA;[Location Ref] varchar(50),&#xA;[Arrs Officer] varchar(50),&#xA;[Prev Arrs Stage] varchar(50),&#xA;[Court Entry Fee] money,&#xA;[Court Warrrant] money,&#xA;[Major Repair Recharge] money,&#xA;[Repairs Recharge] money,&#xA;[Other SD] money,&#xA;[SD Bfwd] money,&#xA;[Weeks in Arrears] money,&#xA;[Gross Arrears] money&#xA;)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C1E5D3F1-2A58-4174-BAC2-121460E04DF5}"
+      DTS:From="Package\Execute SQL Task - Debt_BreakDown Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Preparation SQL Task - Step 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{19578B1B-8F83-4F79-9BAC-18DC5F592395}"
+      DTS:From="Package\Preparation SQL Task - Step 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="289,42"
+          Id="Package\Execute SQL Task - Debt_BreakDown Step 0"
+          TopLeft="40,30" />
+        <NodeLayout
+          Size="221,42"
+          Id="Package\Preparation SQL Task - Step 1"
+          TopLeft="258,174" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="184.5,72">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="155,102"
+              Start="0,0"
+              End="155,94.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47"
+                    Point2="0,51"
+                    Point3="4,51" />
+                  <mssgle:LineSegment
+                    End="151,51" />
+                  <mssgle:CubicBezierSegment
+                    Point1="151,51"
+                    Point2="155,51"
+                    Point3="155,55" />
+                  <mssgle:LineSegment
+                    End="155,94.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="484,340" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="368.5,216">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="191,124"
+              Start="0,0"
+              End="191,116.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,58"
+                    Point2="0,62"
+                    Point3="4,62" />
+                  <mssgle:LineSegment
+                    End="187,62" />
+                  <mssgle:CubicBezierSegment
+                    Point1="187,62"
+                    Point2="191,62"
+                    Point3="191,66" />
+                  <mssgle:LineSegment
+                    End="191,116.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Data Flow Task\Source - Debt_Breakdown_CSV"
+          TopLeft="153,72" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="263,222" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="266,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="82.5,108"
+              Start="0,0"
+              End="82.5,100.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50"
+                    Point2="0,54"
+                    Point3="4,54" />
+                  <mssgle:LineSegment
+                    End="78.5,54" />
+                  <mssgle:CubicBezierSegment
+                    Point1="78.5,54"
+                    Point2="82.5,54"
+                    Point3="82.5,58" />
+                  <mssgle:LineSegment
+                    End="82.5,100.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
