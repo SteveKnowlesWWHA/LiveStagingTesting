@@ -12,8 +12,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Live_CRM_Asbestos"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{D6B894B0-20C1-4F40-9761-C611FF7FF89C}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{E5CB4B39-67C1-4CE8-B670-E1F4441AA20A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -50,6 +50,23 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
           SQLTask:SqlStatementSource="/*** crm_AsbestosSubLocation Using SQL OPENQUERY ***/ &#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_AsbestosSubLocationKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_AsbestosSubLocationKeep;&#xA;&#xA;IF OBJECT_ID('crm_AsbestosSubLocation') IS NOT NULL EXEC sp_rename 'dbo.crm_AsbestosSubLocation', 'crm_AsbestosSubLocationKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_AsbestosSubLocation', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_AsbestosSubLocation; &#xA;&#xA;use livedynamics;&#xA;&#xA;CREATE TABLE [dbo].[crm_AsbestosSubLocation] (&#xA;[AsbestosSubLocName] varchar(50),&#xA;[AsbestosSubLocCode] varchar(50)&#xA;)&#xA;GO&#xA;&#xA;insert into crm_AsbestosSubLocation (&#xA;[AsbestosSubLocName],&#xA;[AsbestosSubLocCode]&#xA;)&#xA;&#xA;select [DESCRIPTION] AS AsbestosSubLocName,&#xA;       [SUB-LOC-CODE] AS AsbestosSubLocCode&#xA;           &#xA;&#xA;&#x9; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;   RMSUBLOCATION.&quot;SUB-LOC-CODE&quot;, &#xA;   RMSUBLOCATION.&quot;DESCRIPTION&quot; &#xA;from &#xA;&#x9;PUB.&quot;RM_SUB-LOCATION&quot; RMSUBLOCATION&#xA;  &#x9;&#xA;&#x9;    ')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 10"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="updates table based on certain values"
+      DTS:DTSID="{774E1ACC-EEDD-4B37-958A-7E0C48D3BDA5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 10"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Mapp asbestos Action to load into Dynamics ***/&#xA;use livedynamics;&#xA;&#xA;update crm_Asbestos set AsbestosActionCode='INVSTF' where AsbestosActionCode='DECONT' &#xA;update crm_Asbestos set AsbestosActionCode='INVSTF' where AsbestosActionCode='INVEST'  &#xA;update crm_Asbestos set AsbestosActionCode='INVSTF' where AsbestosActionCode='INVESTIGAT'&#xA;update crm_Asbestos set AsbestosActionCode='INVSTF' where AsbestosActionCode='SECURE' &#xA;update crm_Asbestos set AsbestosActionCode='INVSTF' where AsbestosActionCode='WARNING'&#xA;update crm_Asbestos set AsbestosActionCode='INVSTF' where AsbestosActionCode='IVESTIGAT'&#xA;&#xA;&#xA;update crm_Asbestos set AsbestosActionCode='MANGIP' where AsbestosActionCode='MIP' &#xA;&#xA;update crm_Asbestos set AsbestosActionCode='REMVUP' where AsbestosActionCode='REMOVE' &#xA;&#xA;update crm_Asbestos set AsbestosActionCode='ENCAPS' where AsbestosActionCode='TREAT'&#xA;&#xA;update crm_Asbestos set AsbestosActionCode='NA' where AsbestosActionCode='UNKNOWN' &#xA;update crm_Asbestos set AsbestosActionCode='NA' where AsbestosActionCode='NONE' &#xA;update crm_Asbestos set AsbestosActionCode='NA' where AsbestosActionCode='NOACTION'&#xA;update crm_Asbestos set AsbestosActionCode='NA' where AsbestosActionCode='NO ACTION'&#xA;&#xA;&#xA;&#xA;use livedynamics;&#xA;&#xA;update crm_AsbestosAction set AsbestosActionCode='INVSTF' where AsbestosActionCode='DECONT' &#xA;update crm_AsbestosAction set AsbestosActionCode='INVSTF' where AsbestosActionCode='INVEST'  &#xA;update crm_AsbestosAction set AsbestosActionCode='INVSTF' where AsbestosActionCode='INVESTIGAT'&#xA;update crm_AsbestosAction set AsbestosActionCode='INVSTF' where AsbestosActionCode='SECURE' &#xA;update crm_AsbestosAction set AsbestosActionCode='INVSTF' where AsbestosActionCode='WARNING'&#xA;update crm_AsbestosAction set AsbestosActionCode='INVSTF' where AsbestosActionCode='IVESTIGAT'&#xA;&#xA;&#xA;update crm_AsbestosAction set AsbestosActionCode='MANGIP' where AsbestosActionCode='MIP' &#xA;&#xA;update crm_AsbestosAction set AsbestosActionCode='REMVUP' where AsbestosActionCode='REMOVE' &#xA;&#xA;update crm_AsbestosAction set AsbestosActionCode='ENCAPS' where AsbestosActionCode='TREAT'&#xA;&#xA;update crm_AsbestosAction set AsbestosActionCode='NA' where AsbestosActionCode='UNKNOWN' &#xA;update crm_AsbestosAction set AsbestosActionCode='NA' where AsbestosActionCode='NONE' &#xA;update crm_AsbestosAction set AsbestosActionCode='NA' where AsbestosActionCode='NOACTION'&#xA;update crm_AsbestosAction set AsbestosActionCode='NA' where AsbestosActionCode='NO ACTION'&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -103,6 +120,91 @@
           SQLTask:SqlStatementSource="/*** crm_AsbestosCondition Using SQL OPENQUERY ***/ " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 5"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="drops current keep table if exists, renames table to add keep and runs SQL query against OH and inserts into table"
+      DTS:DTSID="{93DB6716-91E2-4D9C-8C6B-11B78750F499}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 5"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_AsbestosCondition Using SQL OPENQUERY ***/ &#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_AsbestosConditionKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_AsbestosConditionKeep;&#xA;&#xA;IF OBJECT_ID('crm_AsbestosCondition') IS NOT NULL EXEC sp_rename 'dbo.crm_AsbestosCondition', 'crm_AsbestosConditionKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_AsbestosCondition', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_AsbestosCondition; &#xA;&#xA;use livedynamics;&#xA;CREATE TABLE [dbo].[crm_AsbestosCondition] (&#xA;[AsbestosConditionCode] varchar(50),&#xA;[AsbestosConditionName] varchar(100)&#xA;)&#xA;GO&#xA;&#xA;insert into crm_AsbestosCondition (&#xA;[AsbestosConditionCode],&#xA;[AsbestosConditionName]&#xA;)&#xA;&#xA;select  [CONDITION] AS AsbestosConditionCode,&#xA;           [DESCRIPTION] AS AsbestosConditionName&#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;  &#x9;ABCONDITION.&quot;CONDITION&quot;, &#xA;&#x9;ABCONDITION.&quot;DESCRIPTION&quot; &#xA;from &#xA;&#x9;PUB.AB_CONDITION  ABCONDITION &#xA;&#xA;    ')&#xA;&#xA;&#x9;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 6"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="drops keep table if exists, renames current table to keep, runs SQL query against OH DB and inserts into table"
+      DTS:DTSID="{8E878943-C680-45A3-9F3B-F007D8CC737D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 6"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_AsbestosProtection Using SQL OPENQUERY ***/ &#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_AsbestosProtectionKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_AsbestosProtectionKeep;&#xA;&#xA;IF OBJECT_ID('crm_AsbestosProtection') IS NOT NULL EXEC sp_rename 'dbo.crm_AsbestosProtection', 'crm_AsbestosProtectionKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_AsbestosProtection', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_AsbestosProtection; &#xA;&#xA;use livedynamics;&#xA;&#xA;CREATE TABLE [dbo].[crm_AsbestosProtection] (&#xA;[AsbestosProtectionCode] varchar(50),&#xA;[AsbestosProtectionName] varchar(100)&#xA;)&#xA;GO&#xA;&#xA;insert into crm_AsbestosProtection (&#xA;[AsbestosProtectionCode],&#xA;[AsbestosProtectionName]&#xA;)&#xA;&#xA;select  [PROTECTION] AS AsbestosProtectionCode,&#xA;&#x9;&#x9;[DESCRIPTION] AS AsbestosProtectionName&#xA;&#xA;&#x9;&#x9; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;  &#x9;ABPROTECTION.&quot;PROTECTION&quot;, &#xA;&#x9;ABPROTECTION.&quot;DESCRIPTION&quot; &#xA;from &#xA;&#x9;PUB.&quot;AB_PROTECTION&quot;  ABPROTECTION&#xA;&#xA;&#x9;    ')&#xA;&#xA;&#x9;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 7"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="drops keep table if exists, renames current table to add keep and creates new table, runs query against OH db and inserts into table"
+      DTS:DTSID="{1E27BE0D-015F-48E2-A66D-22C099BE9633}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 7"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_Asbestos Using SQL OPENQUERY ***/ &#xA;&#xA;use livedynamics;&#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_AsbestosKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_AsbestosKeep&#xA;&#xA;select * into&#xA; crm_AsbestosKeep&#xA;from  crm_Asbestos &#xA;&#xA;&#xA;IF OBJECT_ID('dbo.crm_Asbestos', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_Asbestos; &#xA;&#xA;&#xA;CREATE TABLE [dbo].[crm_Asbestos] (&#xA;[PlaceRef] varchar(50),&#xA;[AsbestosSubLocCode] varchar(50),&#xA;[AsbestosComponentCode] varchar(50),&#xA;[AsbestosTypeCode] varchar(50),&#xA;[RiskLevelCode] varchar(50),&#xA;[AsbSysRef] varchar(50),&#xA;[AsbestosMaterialCode] varchar(50),&#xA;[AsbestosConditionCode] varchar(50),&#xA;[AsbestosProtectionCode] varchar(50),&#xA;[AsbestosActionCode] varchar(50),&#xA;[AsbestosSurveySts] varchar(50),&#xA;[AsbestosSurveyDate] date&#xA;)&#xA;GO&#xA;&#xA;&#xA;&#xA;&#xA;insert into crm_Asbestos (&#xA;[PlaceRef],&#xA;[AsbestosSubLocCode],&#xA;[AsbestosComponentCode],&#xA;[AsbestosTypeCode],&#xA;[RiskLevelCode],&#xA;[AsbSysRef],&#xA;[AsbestosMaterialCode],&#xA;[AsbestosConditionCode],&#xA;[AsbestosProtectionCode],&#xA;[AsbestosActionCode],&#xA;[AsbestosSurveySts],&#xA;[AsbestosSurveyDate] &#xA;)&#xA;&#xA;&#xA;select &#xA;   RTRIM(isnull(&quot;PLACE-REF&quot;,'')) AS PlaceRef,&#xA;   isnull(&quot;SUB-LOC-CODE&quot;,'') AS AsbestosSubLocCode,&#xA;   isnull(&quot;ASBESTOS-COMP&quot;,'') AS AsbestosComponentCode,&#xA;   isnull( &quot;ASBESTOS-TYPE&quot;,'') AS AsbestosTypeCode,&#xA;   isnull(&quot;RISK-LEVEL&quot;,'') AS RiskLevelCode,&#xA;    isnull(&quot;ASB-SYS-REF&quot;,'') AS AsbSysRef,&#xA;&#x9;isnull(&quot;MATERIAL&quot;,'') AS sbestosMaterialCode,&#xA;&#x9;isnull(&quot;CONDITION&quot;,'') AS AsbestosConditionCod,&#xA;&#x9;isnull(&quot;PROTECTION&quot;,'') AS AsbestosProtectionCode,&#xA;&#x9;isnull(&quot;ACTION-CODE&quot;,'') AS AsbestosActionCode,&#xA;&#x9;isnull(&quot;ASBESTOS-SURVEY-STS&quot;,'') AS AsbestosSurveySts,&#xA;&#x9;&quot;ASBESTOS-SURVEY-DATE&quot; AS AsbestosSurveyDate &#xA;&#xA;&#x9;&#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;    ASBESTOSDTL.&quot;PLACE-REF&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;SUB-LOC-CODE&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;ASBESTOS-COMP&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;ASBESTOS-TYPE&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;RISK-LEVEL&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;ASB-SYS-REF&quot;,&#xA;&#x9;ASBESTOSDTL.&quot;MATERIAL&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;CONDITION&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;PROTECTION&quot;, &#xA;&#x9;ASBESTOSDTL.&quot;ACTION-CODE&quot; ,&#xA;&#x9;LOCATION.&quot;ASBESTOS-SURVEY-STS&quot;,&#xA;&#x9;LOCATION.&quot;ASBESTOS-SURVEY-DATE&quot; &#xA;&#xA;&#xA;&#xA;&#xA;   from pub.&quot;IH-LOCATION&quot; LOCATION&#xA;&#xA;  INNER JOIN pub.&quot;AB-ASBESTOS-DTL&quot; ASBESTOSDTL ON&#xA;    LOCATION.&quot;PLACE-REF&quot; = ASBESTOSDTL.&quot;PLACE-REF&quot;&#xA;  &#xA;    &#xA;where &#xA;LOCATION.&quot;LOCATION-STS&quot; IN  (''O'',''V'',''X'')&#xA;AND LOCATION.&quot;LOCATION-TYPE&quot; IN (''Block'',''BUNGALOW'',''FLAT'',''HOUSE'',''MAISONET'',''ROOM'',''STUDIO'',''CARELINE'',''GARAGE'')&#xA;AND ASBESTOSDTL.&quot;ORG-CODE&quot; = LOCATION.&quot;ORG-CODE&quot; &#xA;AND ASBESTOSDTL.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot;&#xA;&#xA;    ')&#xA;&#xA;&#x9;&#xA;&#x9;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 8"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="deletes rows from Asbestos table if null or blank"
+      DTS:DTSID="{578CB7EE-730D-409E-B4C0-3E0CA0F08D4A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 8"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Remove balnks ***/&#xA;USE livedynamics;&#xA;&#xA;Delete from crm_AsbestosType where asbestostypecode is null OR asbestostypecode='';&#xA;&#xA;Delete from crm_AsbestosComponent where AsbestosComponentCode is null OR AsbestosComponentCode='';&#xA;&#xA;Delete from crm_AsbestosSubLocation where AsbestosSubLocCode is null OR AsbestosSubLocCode='';&#xA;&#xA;Delete from crm_AsbestosMaterial where AsbestosMaterialcode is null OR Asbestosmaterialcode='';&#xA;&#xA;Delete from crm_AsbestosCondition where AsbestosConditioncode is null OR AsbestosConditioncode='';&#xA;&#xA;Delete from crm_AsbestosProtection where AsbestosProtectioncode is null OR AsbestosProtectioncode='';&#xA;&#xA;Delete from crm_AsbestosAction where AsbestosActionCode is null OR AsbestosActionCode='';&#xA;&#xA;&#xA;Delete from crm_Asbestos where Placeref is null OR Placeref='';&#xA;&#xA;/*** Remove the Garages ***/&#xA;&#xA;Use livedynamics;&#xA;delete crm_asbestos where PlaceRef IN ('00011206', &#xA;'00010925',&#xA;'00011206',&#xA;'00011215',&#xA;'00011221',&#xA;'00011222',&#xA;'00011224'&#xA;,'00039478'&#xA;,'010021'&#xA;,'010031'&#xA;,'010032'&#xA;,'010033'&#xA;,'010034'&#xA;,'010036'&#xA;,'010040'&#xA;,'010041'&#xA;,'010042'&#xA;,'010043'&#xA;,'010045'&#xA;,'010046'&#xA;,'010051'&#xA;,'010054'&#xA;,'010055'&#xA;,'010056'&#xA;,'010058'&#xA;,'010064'&#xA;,'010065'&#xA;,'010071'&#xA;,'010074'&#xA;,'010075'&#xA;,'010076'&#xA;,'010079'&#xA;,'010086'&#xA;,'010087'&#xA;,'010088'&#xA;,'010089'&#xA;,'010090'&#xA;,'010091'&#xA;,'010092'&#xA;,'010094'&#xA;,'010095'&#xA;,'010096'&#xA;,'010100'&#xA;,'010179'&#xA;,'010243'&#xA;,'010245'&#xA;,'010247'&#xA;,'010248'&#xA;,'010249'&#xA;,'010250');&#xA;&#xA;DELETE crm_asbestos where placeref LIKE '%CA%';&#xA;&#xA;DELETE crm_asbestos where placeref LIKE '%T%'&#xA;&#xA;/*** Delete incorrect blocks from asbestos ***/&#xA;&#xA;DELETE crm_asbestos where placeref IN (&#xA; '00031004',&#xA; '00031005',&#xA;'00031007',&#xA;'00031009',&#xA;'00031010',&#xA;'00031011',&#xA;'00031743');&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 9"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="adds additional columns to tables and updates entries in tables"
+      DTS:DTSID="{BB264C6F-E6D3-4794-ACDD-F6516D9B1363}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 9"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/** crm_AsbestosType ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_AsbestosType&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosType set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosType set ImportType='C';&#xA;update crm_AsbestosType set SubmittedOn= GetDate();&#xA;update crm_AsbestosType set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosType **/&#xA;&#xA;/** crm_AsbestosComponent ***/&#xA;&#xA;ALTER TABLE crm_AsbestosComponent&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosComponent set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosComponent set ImportType='C';&#xA;update crm_AsbestosComponent set SubmittedOn= GetDate();&#xA;update crm_AsbestosComponent set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosComponent **/&#xA;&#xA;/** crm_AsbestosSubLocation ***/&#xA;ALTER TABLE crm_AsbestosSubLocation&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosSubLocation set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosSubLocation set ImportType='C';&#xA;update crm_AsbestosSubLocation set SubmittedOn= GetDate();&#xA;update crm_AsbestosSubLocation set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosSubLocation **/&#xA;&#xA;/** crm_Asbestos ***/&#xA;&#xA;ALTER TABLE crm_Asbestos&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_Asbestos set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_Asbestos set ImportType='C';&#xA;update crm_Asbestos set SubmittedOn= GetDate();&#xA;update crm_Asbestos set Importstatus='Pending';&#xA;&#xA;/** End crm_Asbestos **/&#xA;&#xA;/** crm_AsbestosMaterial **/&#xA;use livedynamics;&#xA;ALTER TABLE crm_AsbestosMaterial&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosMaterial set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosMaterial set ImportType='C';&#xA;update crm_AsbestosMaterial set SubmittedOn= GetDate();&#xA;update crm_AsbestosMaterial set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosMaterial **/&#xA;&#xA;/** crm_AsbestosCondition **/&#xA;use livedynamics;&#xA;ALTER TABLE crm_AsbestosCondition&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosCondition set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosCondition set ImportType='C';&#xA;update crm_AsbestosCondition set SubmittedOn= GetDate();&#xA;update crm_AsbestosCondition set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosCondition **/&#xA;&#xA;&#xA;/** crm_AsbestosProtection **/&#xA;use livedynamics;&#xA;ALTER TABLE crm_AsbestosProtection&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosProtection set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosProtection set ImportType='C';&#xA;update crm_AsbestosProtection set SubmittedOn= GetDate();&#xA;update crm_AsbestosProtection set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosProtection  **/&#xA;&#xA;&#xA;/** crm_AsbestosAction **/&#xA;use livedynamics;&#xA;ALTER TABLE crm_AsbestosAction&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_AsbestosAction set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_AsbestosAction set ImportType='C';&#xA;update crm_AsbestosAction set SubmittedOn= GetDate();&#xA;update crm_AsbestosAction set Importstatus='Pending';&#xA;&#xA;/** End crm_AsbestosAction **/&#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -137,6 +239,54 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\Execute SQL Task - Step 4" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{F1193DC1-9A07-4DE4-B9A6-7A0E12E63D00}"
+      DTS:From="Package\Execute SQL Task - Step 4"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Execute SQL Task - Step 5" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{A178D623-E632-4B0C-A1E5-D5F11163FA4B}"
+      DTS:From="Package\Execute SQL Task - Step 5"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Execute SQL Task - Step 6" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{F60C74A0-35B5-4283-918A-8E2E3E8F00AD}"
+      DTS:From="Package\Execute SQL Task - Step 6"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Execute SQL Task - Step 7" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA003153-3F7C-4F19-9E19-9506CAEC815E}"
+      DTS:From="Package\Execute SQL Task - Step 7"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Execute SQL Task - Step 8" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{E3D11F50-249E-4B57-8A1A-997CEAF04C83}"
+      DTS:From="Package\Execute SQL Task - Step 8"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Execute SQL Task - Step 9" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{95ACB4C2-F25E-48FA-A713-13991A17B6D8}"
+      DTS:From="Package\Execute SQL Task - Step 9"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Execute SQL Task - Step 10" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -149,7 +299,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 0"
@@ -286,6 +436,222 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Execute SQL Task - Step 5"
+          TopLeft="619,355" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1029,308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-300,47"
+              Start="0,0"
+              End="-300,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="-4,23.5" />
+                  <mssgle:LineSegment
+                    End="-296,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-296,23.5"
+                    Point2="-300,23.5"
+                    Point3="-300,27.5" />
+                  <mssgle:LineSegment
+                    End="-300,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 6"
+          TopLeft="286,375" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="619,376">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-129,20"
+              Start="0,0"
+              End="-121.5,20">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-60.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-60.5,0"
+                    Point2="-64.5,0"
+                    Point3="-64.5,4" />
+                  <mssgle:LineSegment
+                    End="-64.5,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-64.5,16"
+                    Point2="-64.5,20"
+                    Point3="-68.5,20" />
+                  <mssgle:LineSegment
+                    End="-121.5,20" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 7"
+          TopLeft="15,438" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="286,396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-67,63"
+              Start="0,0"
+              End="-59.5,63">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-29.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-29.5,0"
+                    Point2="-33.5,0"
+                    Point3="-33.5,4" />
+                  <mssgle:LineSegment
+                    End="-33.5,59" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-33.5,59"
+                    Point2="-33.5,63"
+                    Point3="-37.5,63" />
+                  <mssgle:LineSegment
+                    End="-59.5,63" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 8"
+          TopLeft="17,549" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="118,480">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69"
+              Start="0,0"
+              End="0,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="214,43"
+          Id="Package\Execute SQL Task - Step 9"
+          TopLeft="260,607" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="221,570">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39,58.5"
+              Start="0,0"
+              End="31.5,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="15.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.5,0"
+                    Point2="19.5,0"
+                    Point3="19.5,4" />
+                  <mssgle:LineSegment
+                    End="19.5,54.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.5,54.5"
+                    Point2="19.5,58.5"
+                    Point3="23.5,58.5" />
+                  <mssgle:LineSegment
+                    End="31.5,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Execute SQL Task - Step 10"
+          TopLeft="599,626" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="474,628.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125,18.5"
+              Start="0,0"
+              End="117.5,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="58.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58.5,0"
+                    Point2="62.5,0"
+                    Point3="62.5,4" />
+                  <mssgle:LineSegment
+                    End="62.5,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="62.5,14.5"
+                    Point2="62.5,18.5"
+                    Point3="66.5,18.5" />
+                  <mssgle:LineSegment
+                    End="117.5,18.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
