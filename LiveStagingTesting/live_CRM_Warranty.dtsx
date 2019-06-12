@@ -1,0 +1,186 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/10/2019 9:31:35 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{5C4EE139-889D-4AB4-9A2D-F9BB2D80C5E8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_CRM_Warranty"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{9F10E302-5756-4CF9-9A30-C468A7729F2E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
+      DTS:DTSID="{3D9CC4A1-1E65-4C8F-B1B7-236CA9A622DE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_Warranty Using SQL OPENQUERY ***/ &#xA;&#xA;use livedynamics;&#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_WarrantyKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_WarrantyKeep&#xA;&#xA;select * into&#xA; crm_WarrantyKeep&#xA;from  crm_Warranty &#xA;&#xA;&#xA;IF OBJECT_ID('dbo.crm_Warranty', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_Warranty; &#xA;&#xA;&#xA;CREATE TABLE [dbo].[crm_Warranty] (&#xA;[PlaceRef] varchar(50),&#xA;[WarrantyCode] varchar(50),&#xA;[WarrantyType] varchar(50),&#xA;[WarrantyDescription] varchar(2000),&#xA;[WarrantyRelation] varchar(50),&#xA;[WarrantyRelationCode] varchar(50),&#xA;[WarrantyRelationSubCode] varchar(50),&#xA;[StartDate] datetime,&#xA;[ExpiryDate] datetime,&#xA;[ContractorCode] varchar(50)&#xA;)&#xA;GO&#xA;&#xA;&#xA;&#xA;insert into crm_Warranty (&#xA;[PlaceRef],&#xA;[WarrantyCode],&#xA;[WarrantyType],&#xA;[WarrantyDescription],&#xA;[WarrantyRelation],&#xA;[WarrantyRelationCode],&#xA;[WarrantyRelationSubCode],&#xA;[StartDate],&#xA;[ExpiryDate],&#xA;[ContractorCode]&#xA;)&#xA;&#xA;&#xA;select &#xA;   RTRIM(isnull(&quot;PLACE-REF&quot;,'')) AS PlaceRef,&#xA;   isnull(&quot;WARRANTY-CODE&quot;,'') AS WarrantyCode,&#xA;   isnull(&quot;WARRANTY-TYPE&quot;,'') AS WarrantyType,&#xA;   isnull( &quot;DESCRIPTION&quot;,'') AS WarrantyDescription,&#xA;   isnull(&quot;RELATION&quot;,'') AS WarrantyRelation,&#xA;    isnull(&quot;RELATION-CODE&quot;,'') AS WarrantyRelationCode,&#xA;&#x9;isnull(&quot;RELATION-SUB-CODE&quot;,'') AS WarrantyRelationSubCode,&#xA;&#x9;isnull(&quot;START-DATE&quot;,'') AS StartDate,&#xA;&#x9;isnull(&quot;EXPIRY-DATE&quot;,'') AS ExpiryDate,&#xA;&#x9;isnull(&quot;CONTRACTOR&quot;,'') AS ContractorCode&#xA;&#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;    LOCATION.&quot;PLACE-REF&quot;,&#xA;&#x9;LOCWARRANTIES.&quot;WARRANTY-CODE&quot;,&#xA;&#x9;LOCWARRANTIES.&quot;DESCRIPTION&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;WARRANTY-TYPE&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;RELATION&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;RELATION-CODE&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;RELATION-SUB-CODE&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;EXPIRY-DATE&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;START-DATE&quot;, &#xA;&#x9;LOCWARRANTIES.&quot;CONTRACTOR&quot;&#xA;&#x9;&#x9;&#xA;&#x9;from PUB.&quot;IH-LOC-WARRANTIES&quot; LOCWARRANTIES&#xA;&#xA;&#x9;INNER JOIN PUB.&quot;IH-LOCATION&quot; LOCATION ON&#xA;    LOCATION.&quot;PLACE-REF&quot; = LOCWARRANTIES.&quot;PLACE-REF&quot; &#xA;&#x9;&#x9;   &#xA;where &#xA;LOCATION.&quot;LOCATION-STS&quot; IN  (''O'',''V'',''X'')&#xA;AND LOCATION.&quot;LOCATION-TYPE&quot; IN (''Block'',''BUNGALOW'',''FLAT'',''HOUSE'',''MAISONET'',''ROOM'',''STUDIO'',''GARAGE'')&#xA;AND LOCWARRANTIES.&quot;EXPIRY-DATE&quot; &gt; curdate()&#xA;AND LOCATION.&quot;ORG-CODE&quot; = LOCWARRANTIES.&quot;ORG-CODE&quot; &#xA;&#xA;    ')&#xA;&#xA;&#x9;&#xA;&#x9;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Deletes rows based on certain values, then where date is 1899 will set the dates to NULL"
+      DTS:DTSID="{9FAB448F-8BC5-4359-8576-019BA5D904A2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete blanks ***/&#xA;&#xA;Use livedynamics;&#xA;Delete from crm_Warranty where Placeref is null OR Placeref='';&#xA;&#xA;&#xA;/*** deleting for now until knowing what to do with them ***/&#xA; delete crm_Warranty where placeref LIKE '%TAIH%';&#xA; delete crm_Warranty where placeref='00061436';&#xA;&#xA;&#xA;/*** Change any null dates ***/&#xA;&#xA;Update crm_warranty set [StartDate]= NULL where [StartDate]='1899-12-30 00:00:00.000';&#xA;&#xA;Update crm_warranty set [ExpiryDate]= NULL where [ExpiryDate]='1899-12-30 00:00:00.000';&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Alters table to add additional columns and will then update certain values"
+      DTS:DTSID="{F16B3D82-F090-4CFD-948E-F61CD6D71810}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** ALTER tables to ADD 5 remaining colums and set ****/&#xA;Use livedynamics;&#xA;/** crm_Warranty ***/&#xA;&#xA;ALTER TABLE crm_Warranty&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_Warranty set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_Warranty set ImportType='C';&#xA;update crm_Warranty set SubmittedOn= GetDate();&#xA;update crm_Warranty set Importstatus='Pending';&#xA;&#xA;/** End crm_Warranty **/&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{37FE62BB-F184-40D3-B84B-3E73F96AB1F9}"
+      DTS:From="Package\Execute SQL Task - Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Step 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{06272ED5-17F3-436E-B1CE-A305AE8481AA}"
+      DTS:From="Package\Execute SQL Task - Step 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute SQL Task - Step 2" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 0"
+          TopLeft="194,85" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 1"
+          TopLeft="412,251" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="296,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="218,124"
+              Start="0,0"
+              End="218,116.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,58"
+                    Point2="0,62"
+                    Point3="4,62" />
+                  <mssgle:LineSegment
+                    End="214,62" />
+                  <mssgle:CubicBezierSegment
+                    Point1="214,62"
+                    Point2="218,62"
+                    Point3="218,66" />
+                  <mssgle:LineSegment
+                    End="218,116.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 2"
+          TopLeft="687,425" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="514,293">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="275,132"
+              Start="0,0"
+              End="275,124.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,62"
+                    Point2="0,66"
+                    Point3="4,66" />
+                  <mssgle:LineSegment
+                    End="271,66" />
+                  <mssgle:CubicBezierSegment
+                    Point1="271,66"
+                    Point2="275,66"
+                    Point3="275,70" />
+                  <mssgle:LineSegment
+                    End="275,124.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

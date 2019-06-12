@@ -1,0 +1,249 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/10/2019 1:06:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{FBFF7120-3AD4-4A39-8741-E1F2A6B0D389}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_CRM_TenancyDebt"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{C746BD69-CF28-483E-B281-5B98330349C4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{8ED2ADCC-1568-4F69-9F02-FF053D94A5D5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/****** Script for inserting into crm_TenancyDebt  tenancy ref and primary arreras (from Debit breakdown report/table ****/&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_TenancyDebtKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_TenancyDebtKeep;&#xA;&#xA;IF OBJECT_ID('crm_TenancyDebt') IS NOT NULL EXEC sp_rename 'crm_TenancyDebt', 'crm_TenancyDebtKEEP';&#xA;&#xA;IF OBJECT_ID('crm_TenancyDebt', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_TenancyDebt; &#xA;&#xA;&#xA;&#xA;SELECT T.TenancyRef&#xA;       ,P.[Primary Arrs]&#xA;&#xA;INTO crm_TenancyDebt&#xA;&#xA;     FROM [livedynamics].[dbo].[crm_Tenancy] T&#xA;&#xA;left join [livedynamics].[dbo].[debt-breakdown] P&#xA;on T.TenancyRef=P.[Tenancy Ref]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Deletes rows if NULL or blank value, adds columns"
+      DTS:DTSID="{5967E326-68CE-445F-AA00-A4086F655720}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete blank lines and Add Importer columns ***/&#xA;USE livedynamics;&#xA;&#xA;Delete from crm_tenancydebt where TenancyRef is null OR TenancyRef=''; &#xA;&#xA;&#xA;&#xA;/** crm_tenancydebt ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_tenancydebt&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_tenancydebt set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_tenancydebt set ImportType='U';&#xA;update crm_tenancydebt set SubmittedOn= GetDate();&#xA;update crm_tenancydebt set Importstatus='Pending';&#xA;&#xA;/** End crm_tenancydebt **/&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{60FA9A9A-0DE1-404F-A444-7378D94B124C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/****** Script for inserting into crm_TenancyDebtFormer  tenancy ref and primary arreras (from Debit breakdown report/table ****/&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_TenancyDebtFormerKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_TenancyDebtFormerKeep;&#xA;&#xA;IF OBJECT_ID('crm_TenancyDebtFormer') IS NOT NULL EXEC sp_rename 'crm_TenancyDebtFormer', 'crm_TenancyDebtFormerKEEP';&#xA;&#xA;IF OBJECT_ID('crm_TenancyDebtFormer', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_TenancyDebtFormer; &#xA;&#xA;&#xA;&#xA;SELECT T.TenancyRef&#xA;       ,P.[Primary Arrs]&#xA;&#xA;INTO crm_TenancyDebtFormer&#xA;&#xA;     FROM [livedynamics].[dbo].[crm_TenancyFormer] T&#xA;&#xA;left join [livedynamics].[dbo].[debt-breakdown] P&#xA;on T.TenancyRef=P.[Tenancy Ref]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 4"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Deletes rows if NULL or blank values, adds columns and then updates certain vlaues"
+      DTS:DTSID="{0C273ADB-39F5-49E6-A2AB-A8962D7FAA90}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 4"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete blank lines and Add Importer columns ***/&#xA;USE livedynamics;&#xA;&#xA;Delete from crm_tenancydebtFormer where TenancyRef is null OR TenancyRef=''; &#xA;&#xA;&#xA;&#xA;/** crm_tenancydebtFormer ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_tenancydebtFormer&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_tenancydebtFormer set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_tenancydebtFormer set ImportType='U';&#xA;update crm_tenancydebtFormer set SubmittedOn= GetDate();&#xA;update crm_tenancydebtFormer set Importstatus='Pending';&#xA;&#xA;/** End crm_tenancydebtFormer **/&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5A3E19CE-C716-4A8F-B968-956D371AF6CC}"
+      DTS:From="Package\Execute SQL Task - Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Step 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{25A8CA91-FD0C-4038-A7BE-1AB169917365}"
+      DTS:From="Package\Execute SQL Task - Step 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute SQL Task - Step 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{B8E17B29-8282-46BE-AE07-CFB5C8B6C2D0}"
+      DTS:From="Package\Execute SQL Task - Step 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Execute SQL Task - Step 4" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 0"
+          TopLeft="34,14" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 1"
+          TopLeft="199,137" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="136,56">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="165,81"
+              Start="0,0"
+              End="165,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.5"
+                    Point2="0,40.5"
+                    Point3="4,40.5" />
+                  <mssgle:LineSegment
+                    End="161,40.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="161,40.5"
+                    Point2="165,40.5"
+                    Point3="165,44.5" />
+                  <mssgle:LineSegment
+                    End="165,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 2"
+          TopLeft="429,283" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="301,179">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="230,104"
+              Start="0,0"
+              End="230,96.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48"
+                    Point2="0,52"
+                    Point3="4,52" />
+                  <mssgle:LineSegment
+                    End="226,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="226,52"
+                    Point2="230,52"
+                    Point3="230,56" />
+                  <mssgle:LineSegment
+                    End="230,96.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 4"
+          TopLeft="657,416" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="531,325">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="228,91"
+              Start="0,0"
+              End="228,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.5"
+                    Point2="0,45.5"
+                    Point3="4,45.5" />
+                  <mssgle:LineSegment
+                    End="224,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="224,45.5"
+                    Point2="228,45.5"
+                    Point3="228,49.5" />
+                  <mssgle:LineSegment
+                    End="228,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

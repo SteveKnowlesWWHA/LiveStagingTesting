@@ -1,0 +1,123 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/10/2019 10:31:53 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{62D4FF2F-A8CA-437C-9393-9DE8F8ACF983}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_CRM_PersonDIS"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{1A22AE73-D24F-405E-9248-EAA078393875}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{C0FF5825-AD18-48F3-B5FC-0F6EB809FDBE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Create New crm_PersonDIS using OPENQUERY SQL ***/&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_PersonDISKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_PersonDISKeep&#xA;&#xA;&#xA;EXEC sp_rename [crm_PersonDIS],[crm_PersonDISKEEP];&#xA;&#xA;IF OBJECT_ID('dbo.crm_PersonDIS', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_PersonDIS; &#xA;&#xA;&#xA;&#xA;use livedynamics;&#xA;&#xA;CREATE TABLE [dbo].[crm_personDIS] (&#xA;[Forenames] varchar(50),&#xA;[Surname] varchar(50),&#xA;[Deceased] varchar(50),&#xA;[PersonTitle] varchar(50),&#xA;[DisCode] varchar(50),&#xA;[DisValue] varchar(50),&#xA;[Dis1Code] varchar(50),&#xA;[Dis1Value] varchar(50),&#xA;[PersonRef] varchar(50),&#xA;[TenancyRef] varchar(50),&#xA;[PlaceRef] varchar(50)&#xA;)&#xA;GO&#xA;&#xA;&#xA;insert into crm_PersonDIS (&#xA;[Forenames],&#xA;[Surname],&#xA;[Deceased],&#xA;[PersonTitle],&#xA;[DisCode],&#xA;[DisValue],&#xA;[Dis1Code],&#xA;[Dis1Value],&#xA;[PersonRef],&#xA;[TenancyRef],&#xA;[PlaceRef])&#xA;&#xA;&#xA;select isnull(FORENAMES,'') AS Forenames,&#xA;&#x9;   isnull(SURNAME,'') AS Surname,&#xA;    &#x9;isnull(DECEASED,'') AS Deceased,&#xA;&#x9;isnull([PERSON-TITLE],'') AS PersonTitle,&#xA;&#x9;DisCode,&#xA;&#x9;DisValue,&#xA;&#x9;Dis1Code,&#xA;&#x9;Dis1Value,&#xA;&#x9;RTRIM([PERSON-REF]) AS PersonRef,&#xA;&#x9;RTRIM([TENANCY-REF]) AS TenancyRef,&#xA;&#x9;RTRIM([PLACE-REF]) AS PlaceRef&#xA;&#x9;&#xA;&#x9;&#xA;&#xA;&#x9;from Openquery(LIVE_OH, &#xA;&#xA;'select &#xA;&#x9;TENANCY.&quot;TENANCY-REF&quot;,&#xA;&#x9;TENANCY.&quot;TNCY-STATUS&quot;,&#xA;&#x9;TNCYPLACE.&quot;PLACE-REF&quot;,&#xA;&#x9;TNCYPERSON.&quot;PERSON-REF&quot;,&#xA;&#x9;TNCYPERSON.&quot;ON-TNCY&quot;,&#xA;&#x9;TNCYPERSON.&quot;TNCY-SYS-REF&quot;,&#xA;    TNCYPERSON.&quot;MAIN-CONTACT&quot;,&#xA;&#x9;TNCYPERSON.&quot;END-DATE&quot;,&#xA;    PERSON.&quot;D-O-B&quot;, &#xA;    PERSON.&quot;COMPANY&quot;, &#xA;&#x9;PERSON.&quot;DATE-OF-DEATH&quot;, &#xA;&#x9;PERSON.DECEASED, &#xA;&#x9;PERSON.FORENAMES, &#xA;&#x9;PERSON.GENDER, &#xA;&#x9;PERSON.INITIALS, &#xA;&#x9;PERSON.&quot;ORIGIN-CODE&quot;, &#xA;&#x9;PERSON.&quot;PERSON-TITLE&quot;, &#xA;&#x9;PERSON.SURNAME,&#xA;&#x9;PERSON.&quot;NHI-NO&quot;,&#xA;&#x9;PERSON.&quot;POTENTIALLY-VIOLENT&quot;, &#xA;&#x9;PERSONCONTACT.&quot;CONTACT-DETAILS&quot;, &#xA;&#x9;PERSONCONTACT.&quot;CONTACT-TYPE&quot;,&#xA;&#x9;PERSONDESCATTRDIS.&quot;ATTRIB-CODE&quot; AS DisCode, &#xA;&#x9;PERSONDESCATTRDIS.&quot;LOG-VALUE&quot; AS DisValue,&#xA;&#x9;PERSONDESCATTRDIS1.&quot;ATTRIB-CODE&quot; AS Dis1Code,&#xA;&#x9;PERSONDESCATTRDIS1.&quot;SUB-ATTRIB-CODE&quot; AS Dis1Value&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;from PUB.&quot;RE-TNCY-PERSON&quot; TNCYPERSON,&#xA;&#x9;PUB.&quot;IH-LOCATION&quot; LOCATION,&#xA;&#x9;PUB.&quot;RE-TNCY-PLACE&quot; TNCYPLACE,&#xA;&#x9;PUB.&quot;RE-TENANCY&quot; TENANCY,&#xA;&#x9;PUB.&quot;CO-PERSON&quot; PERSON&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9;  PUB.&quot;CO-PERSON-CONTACT&quot; PERSONCONTACT ON  PERSON.&quot;PERSON-REF&quot; = PERSONCONTACT.&quot;PERSON-REF&quot; AND PERSONCONTACT.&quot;CONTACT-TYPE&quot; = ''TEL''&#xA;&#x9;and PERSONCONTACT.&quot;PRIORITY&quot; = 1&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRDIS ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRDIS.&quot;PERSON-REF&quot; AND PERSONDESCATTRDIS.&quot;ATTRIB-CODE&quot; = ''DIS'' &#xA;&#x9;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRDIS1 ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRDIS1.&quot;PERSON-REF&quot; AND PERSONDESCATTRDIS1.&quot;ATTRIB-CODE&quot; = ''DIS1'' &#x9;&#xA;&#x9;&#x9;&#xA;where &#xA;&#x9;TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#x9;And LOCATION.&quot;MGT-AREA&quot; IN (''1'',''2'',''3'',''4'',''5'',''6'',''7'',''8'',''9'',''10'',''CARE'')&#xA;&#x9;and LOCATION.&quot;LOCATION-STS&quot; IN (''O'',''V'')&#xA;&#x9;and LOCATION.&quot;LOCATION-TYPE&quot; IN (''BLOCK'',''BUNGALOW'', ''FLAT'', ''HOUSE'', ''MAISONET'', ''ROOM'',''STUDIO'')&#xA;&#x9;and TNCYPERSON.&quot;PERSON-REF&quot; NOT IN (''1000182'', &#xA;&#x9;&#x9;&#x9;&#x9;''1133011'', &#xA;&#x9;&#x9;&#x9;&#x9;''1142667'', &#xA;&#x9;&#x9;&#x9;&#x9;''12253321990076'', &#xA;&#x9;&#x9;&#x9;&#x9;''13111499990023'', &#xA;&#x9;&#x9;&#x9;&#x9;''15143313990557'', &#xA;&#x9;&#x9;&#x9;&#x9;''18112311990199'', &#xA;&#x9;&#x9;&#x9;&#x9;''18112314230009'', &#xA;&#x9;&#x9;&#x9;&#x9;''18112314280001'', &#xA;&#x9;&#x9;&#x9;&#x9;''23152223990013'', &#xA;&#x9;&#x9;&#x9;&#x9;''4139127'', &#xA;&#x9;&#x9;&#x9;&#x9;''4140699'')&#xA;&#xA;&#x9;and TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;&#x9;and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;&#x9;and TNCYPLACE.&quot;ORG-CODE&quot; = LOCATION.&quot;ORG-CODE&quot; &#xA;&#x9;and TNCYPLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot; &#xA;&#x9;and TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;&#x9;and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;&#x9;and TNCYPERSON.&quot;PERSON-REF&quot; =PERSON.&quot;PERSON-REF&quot;&#xA;&#xA;&#xA;&#x9;')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Deletes rows based on certain vaule, updates rows based on other values and adds columns for mapping"
+      DTS:DTSID="{2DFD9A42-27A3-434B-AAB1-52F67B285C32}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete 2 blank records ***/&#xA;use livedynamics;&#xA;&#xA;Delete from crm_personDIS where PersonRef is null OR PersonRef='';&#xA;&#xA;/*** Duplicates **/&#xA;delete crm_personDIS where personref='2105043';&#xA;delete crm_personDIS where personref='21152433990040' ;&#xA;delete crm_personDIS where personref='33112211990001';&#xA;&#xA;&#xA;&#xA;/** Create coulmn DisableCode ***/&#xA;&#xA;ALTER TABLE crm_personDIS&#xA;&#x9;ADD DisableCode varchar(10)&#xA;&#x9;&#x9;GO&#xA;/** End crm_persondis **/&#xA;&#xA;&#xA;/*** Mapp disable and disable1 codes into new field DisableCode ***/&#xA;&#xA;use livedynamics;&#xA;update crm_persondis set DisableCode='LIMA' where Dis1value='LIMA' and Dis1Code='Dis1';&#xA;&#xA;update crm_persondis set DisableCode='LIMB' where Dis1value='LIMB';&#xA;update crm_persondis set DisableCode='LIMC' where Dis1value='LIMC';&#xA;update crm_persondis set DisableCode='LIMS' where Dis1value='LIMS';&#xA;&#xA;&#xA;update crm_personDis set disablecode='OLDYES' where disvalue ='1' and Dis1Code IS NULL&#xA;&#xA;update crm_personDis set disablecode='OLDNO' where disvalue ='0' and Dis1Code IS NULL&#xA;&#xA;delete crm_personDIS where DisableCode is null;&#xA;&#xA;/*** Now clear NULL from the table ***/&#xA;&#xA;update crm_personDIS set DisCode='' where DisCode IS NULL;&#xA;update crm_personDIS set DisValue='' where DisValue IS NULL;&#xA;update crm_personDIS set Dis1Code='' where Dis1Code IS NULL;&#xA;update crm_personDIS set Dis1Value='' where Dis1Value IS NULL;&#xA;&#xA;/** End Map ***/&#xA;&#xA;&#xA;/*** ALTER tables to ADD 5 remaining colums and set ****/&#xA;&#xA;Use livedynamics;&#xA;&#xA;/** crm_PersonDIS ***/&#xA;&#xA;ALTER TABLE crm_PersonDIS&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_PersonDIS set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_PersonDIS set ImportType='U';&#xA;update crm_PersonDIS set SubmittedOn= GetDate();&#xA;update crm_PersonDIS set Importstatus='Pending';&#xA;&#xA;/** End crm_PersonDIS **/&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7F08324C-95A8-464B-807F-07668F6434DE}"
+      DTS:From="Package\Execute SQL Task - Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Step 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 0"
+          TopLeft="73,37" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 1"
+          TopLeft="313,193" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="175,79">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="240,114"
+              Start="0,0"
+              End="240,106.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,53"
+                    Point2="0,57"
+                    Point3="4,57" />
+                  <mssgle:LineSegment
+                    End="236,57" />
+                  <mssgle:CubicBezierSegment
+                    Point1="236,57"
+                    Point2="240,57"
+                    Point3="240,61" />
+                  <mssgle:LineSegment
+                    End="240,106.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

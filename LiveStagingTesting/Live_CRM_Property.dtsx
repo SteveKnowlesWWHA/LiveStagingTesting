@@ -1,0 +1,438 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/10/2019 11:46:49 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{7B2078BB-748E-4350-9322-3E1B13919DB5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_CRM_Property"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{29A609F7-B202-4D8D-B1D9-95215AB981B1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{D534A1F1-83A1-40D5-8D4D-EF704A0D3917}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_Property Using SQL OPENQUERY ***/ &#xA;&#xA;use livedynamics;&#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_PropertyKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_PropertyKeep&#xA;&#xA;&#xA;EXEC sp_rename [crm_property],[crm_propertyKEEP]; &#xA;&#xA;&#xA;IF OBJECT_ID('dbo.crm_Property', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_Property; &#xA;&#xA;&#xA;  CREATE TABLE [dbo].[crm_Property] (&#xA;[Address] varchar(80),&#xA;[PlaceRef] varchar(50),&#xA;[LocationType] varchar(50),&#xA;[LocationSts] varchar(50),&#xA;[OfficerCode] varchar(50),&#xA;[AreaCode] varchar(50),&#xA;[AddressLine1] varchar(50),&#xA;[AddressLine2] varchar(50),&#xA;[AddressLine3] varchar(50),&#xA;[AddressLine4] varchar(50),&#xA;[AddressLine5] varchar(50),&#xA;[Town] varchar(50),&#xA;[PostCode] varchar(50),&#xA;[PersonRef] varchar(50),&#xA;[HeatCode] varchar(50),&#xA;[Bedrooms] varchar(50),&#xA;[Scheme] varchar(50),&#xA;[BuildingType] varchar(50),&#xA;[Floor] varchar(50),&#xA;[MaxOccupants] varchar(50),&#xA;[MgtArea] varchar(50),&#xA;[RespOfficer] varchar(50),&#xA;[LettingsArea] varchar(50),&#xA;[BlockRef] varchar(50),&#xA;[EstateCode] varchar(50),&#xA;[BuildDate] datetime,&#xA;[TenancyRef] varchar(50)&#xA;)&#xA;GO&#xA;&#xA;&#xA;&#xA;insert into crm_Property (&#xA;[Address] ,&#xA;[PlaceRef],&#xA;[LocationType],&#xA;[LocationSts] ,&#xA;[OfficerCode] ,&#xA;[AreaCode] ,&#xA;[AddressLine1] ,&#xA;[AddressLine2] ,&#xA;[AddressLine3] ,&#xA;[AddressLine4] ,&#xA;[AddressLine5] ,&#xA;[Town] ,&#xA;[PostCode] ,&#xA;[PersonRef] ,&#xA;[HeatCode] ,&#xA;[Bedrooms] ,&#xA;[Scheme] ,&#xA;[BuildingType] ,&#xA;[Floor] ,&#xA;[MaxOccupants] ,&#xA;[MgtArea] ,&#xA;[RespOfficer] ,&#xA;[LettingsArea] ,&#xA;[BlockRef] ,&#xA;[EstateCode],&#xA;[BuildDate],&#xA;[TenancyRef])&#xA;&#xA;&#xA;select convert(varchar(80),&quot;ADDRESS&quot;) AS Address,&#xA;   RTRIM(isnull(&quot;PLACE-REF&quot;,'')) AS PlaceRef,&#xA;   isnull(&quot;LOCATION-TYPE&quot;,'') AS LocationType,&#xA;   isnull(&quot;LOCATION-STS&quot;,'') AS LocationSts,&#xA;   isnull( &quot;ARREARS-OFCR&quot;,'') AS OfficerCode,&#xA;   isnull(&quot;AREA-CODE&quot;,'') AS AreaCode,&#xA;    RTRIM(substring(&quot;ADDRESS&quot;,1,CHARINDEX(';',&quot;ADDRESS&quot;,1)-1)) AS AddressLine1,&#xA;RTRIM(substring(ADDRESS,CHARINDEX(';',ADDRESS,1) + 1, (CHARINDEX(';',ADDRESS,(CHARINDEX(';',ADDRESS,1)+ 1)))- CHARINDEX(';',ADDRESS,1)-1)) as AddressLine2,&#xA;RTRIM(SUBSTRING(ADDRESS,CHARINDEX(';',ADDRESS,(CHARINDEX(';',ADDRESS,1)+1))+1,(CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1)&#xA;                                            -CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,1)+ 1))-1)) as AddressLine3,&#xA;     RTRIM(SUBSTRING(ADDRESS,CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1)+1,(CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,&#xA; CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1) + 1)-CHARINDEX(';', ADDRESS,CHARINDEX(';', ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1))-1)) as AddressLine4,&#xA;  RTRIM(RIGHT(ADDRESS,CHARINDEX(';', REVERSE(ADDRESS)) - 1)) AS AddressLine5,&#xA;  RTRIM(isnull(&quot;TOWN&quot;,'')) AS Town,&#xA;    RTRIM(isnull(&quot;POST-CODE&quot;,'')) AS PostCode,&#xA;    RTRIM(isnull(&quot;PERSON-REF&quot;,'')) AS PersonRef,&#xA;    isnull(&quot;HEAT-CODE&quot;,'') AS HeatCode, &#xA;    isnull(&quot;BEDROOMS&quot;,'') AS Bedrooms,&#xA;    RTRIM(isnull(&quot;SCHEME&quot;,'')) AS Scheme, &#xA;    isnull(&quot;BUILDING-TYPE&quot;,'') AS BuildingType,&#xA;    isnull(&quot;FLOOR&quot;,'') AS &quot;Floor&quot;, &#xA;    isnull(&quot;MAX-OCCUPANTS&quot;,'') AS MaxOccupants, &#xA;    isnull(&quot;MGT-AREA&quot;,'') AS MgtArea, &#xA;    isnull(&quot;RESP-OFFICER&quot;,'') AS RespOfficer, &#xA;    isnull(&quot;SUB-AREA-CODE&quot;,'') AS LettingsArea, &#xA;    RTRIM(isnull(&quot;BLOCK-REF&quot;,'')) AS BlockRef, &#xA;    isnull(&quot;ESTATE-CODE&quot;,'') AS EstateCode,&#xA;&#x9;&quot;Build-Date&quot; AS BuildDate,&#xA;&#x9;RTRIM(isnull(&quot;TENANCY-REF&quot;,'')) AS TenancyRef&#xA;&#xA;&#xA;&#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;   LOCATION.&quot;AREA-CODE&quot;,&#xA;   LOCATION.&quot;ARREARS-OFCR&quot;, &#xA;   LOCATION.&quot;BEDROOMS&quot;, &#xA;   LOCATION.&quot;BLOCK-REF&quot;, &#xA;   LOCATION.&quot;BUILDING-TYPE&quot;, &#xA;   LOCATION.&quot;ESTATE-CODE&quot;,&#xA;   LOCATION.&quot;FLOOR&quot;, &#xA;   LOCATION.&quot;HEAT-CODE&quot;, &#xA;   LOCATION.&quot;LOCATION-TYPE&quot;, &#xA;   LOCATION.&quot;LOCATION-STS&quot;, &#xA;   LOCATION.&quot;MAX-OCCUPANTS&quot;, &#xA;   LOCATION.&quot;MGT-AREA&quot;, &#xA;   LOCATION.&quot;PLACE-REF&quot;, &#xA;   LOCATION.&quot;RENT-GROUP&quot;, &#xA;   LOCATION.&quot;RESP-OFFICER&quot;, &#xA;   LOCATION.&quot;SCHEME&quot;, &#xA;   LOCATION.&quot;SUB-AREA-CODE&quot;, &#xA;   LOCATION.&quot;BUILD-DATE&quot;,&#xA;   PLACE.&quot;ADDRESS&quot;,&#xA;   PLACE.&quot;POST-CODE&quot;, &#xA;   PLACE.&quot;STREET&quot;,&#xA;   STREET.&quot;TOWN&quot;,&#xA;   TENANCY.&quot;TENANCY-REF&quot;,&#xA;   TENANCY.&quot;TNCY-STATUS&quot;, &#xA;   TNCYPERSON.&quot;PERSON-REF&quot;, &#xA;   TNCYPERSON.&quot;MAIN-CONTACT&quot;, &#xA;   TNCYPERSON.&quot;ON-TNCY&quot;&#xA; &#xA;   &#xA;   from pub.&quot;IH-LOCATION&quot; LOCATION&#xA;&#xA;  INNER JOIN pub.&quot;CO-PLACE&quot; PLACE ON&#xA;    PLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot;&#xA;  INNER JOIN pub.&quot;CO_STREET&quot; STREET ON&#xA;    STREET.&quot;STREET&quot; = PLACE.&quot;STREET&quot;&#xA;   &#xA;  LEFT OUTER JOIN&#xA;&#xA;       (pub.&quot;RE-TNCY-PLACE&quot; TNCYPLACE &#xA;  INNER JOIN pub.&quot;RE-TENANCY&quot; TENANCY ON&#xA;       TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;   and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;   AND TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#xA;  INNER JOIN pub.&quot;RE-TNCY-PERSON&quot; TNCYPERSON ON &#xA;    TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;    and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;    AND  TNCYPERSON.&quot;ON-TNCY&quot; = 1 &#xA;    AND TNCYPERSON.&quot;MAIN-CONTACT&quot; = 1 )&#xA;&#xA;ON LOCATION.&quot;PLACE-REF&quot; = TNCYPLACE.&quot;PLACE-REF&quot;&#xA;&#xA;where &#xA;LOCATION.&quot;LOCATION-STS&quot; IN  (''O'',''V'')&#xA;AND LOCATION.&quot;LOCATION-TYPE&quot; IN (''BUNGALOW'',''FLAT'',''HOUSE'',''MAISONET'',''ROOM'',''STUDIO'')&#xA;AND LOCATION.&quot;MGT-AREA&quot; IN (''1'',''2'',''3'',''4'',''5'',''6'',''7'',''8'',''9'',''10'',''CARE'')&#xA;AND PLACE.&quot;INTERNAL&quot; = 1&#xA;&#xA;&#xA;    ')" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Deletes rows based on certain values, then where date is 1899 will set the dates to NULL, adds columns "
+      DTS:DTSID="{407EE904-B3C4-4227-AE68-019D3288ED42}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete blank lines from livedynamics ***/&#xA;USE livedynamics;&#xA;Delete from crm_property where PlaceRef is null OR PlaceRef='';&#xA;&#xA;/****** Script for sdetting dates to NULL  ******/&#xA;Use livedynamics;&#xA;&#xA;Update [crm_Property] set [BuildDate]= NULL where [Builddate]='1899-12-30 00:00:00.000';&#xA;&#xA;&#xA;&#xA;/*** ALTER tables to ADD 5 remaining colums and set ****/&#xA;&#xA;Use livedynamics;&#xA;&#xA;/** crm_Property ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_Property&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_Property set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_Property set ImportType='C';&#xA;update crm_Property set SubmittedOn= GetDate();&#xA;update crm_Property set Importstatus='Pending';&#xA;&#xA;/** End crm_Property **/&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{050397DB-930B-4A0B-84FF-D546C7D73412}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_Block Using SQL OPENQUERY ***/ &#xA;&#xA;use livedynamics;&#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_BlockKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_BlockKeep;&#xA;&#xA;IF OBJECT_ID('crm_Block') IS NOT NULL EXEC sp_rename 'dbo.crm_Block', 'crm_BlockKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_Block', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_Block; &#xA;&#xA;  use livedynamics;&#xA;CREATE TABLE [dbo].[crm_block] (&#xA;[Address] varchar(180),&#xA;[PlaceRef] varchar(50),&#xA;[LocationType] varchar(50),&#xA;[LocationSts] varchar(50),&#xA;[OfficerCode] varchar(50),&#xA;[AreaCode] varchar(50),&#xA;[AddressLine1] varchar(180),&#xA;[AddressLine2] varchar(50),&#xA;[AddressLine3] varchar(50),&#xA;[AddressLine4] varchar(50),&#xA;[AddressLine5] varchar(50),&#xA;[Town] varchar(50),&#xA;[PostCode] varchar(50),&#xA;[PersonRef] varchar(50),&#xA;[HeatCode] varchar(50),&#xA;[Bedrooms] varchar(50),&#xA;[Scheme] varchar(50),&#xA;[BuildingType] varchar(50),&#xA;[Floor] varchar(50),&#xA;[MaxOccupants] varchar(50),&#xA;[MgtArea] varchar(50),&#xA;[RespOfficer] varchar(50),&#xA;[LettingsArea] varchar(50),&#xA;[BlockRef] varchar(50),&#xA;[EstateCode] varchar(50)&#xA;)&#xA;GO&#xA;&#xA;&#xA;  &#xA;&#xA;insert into crm_Block (&#xA;[Address],&#xA;[PlaceRef],&#xA;[LocationType],&#xA;[LocationSts],&#xA;[OfficerCode],&#xA;[AreaCode],&#xA;[AddressLine1],&#xA;[AddressLine2],&#xA;[AddressLine3],&#xA;[AddressLine4],&#xA;[AddressLine5],&#xA;[Town],&#xA;[PostCode],&#xA;[PersonRef],&#xA;[HeatCode],&#xA;[Bedrooms] ,&#xA;[Scheme] ,&#xA;[BuildingType],&#xA;[Floor],&#xA;[MaxOccupants],&#xA;[MgtArea],&#xA;[RespOfficer],&#xA;[LettingsArea],&#xA;[BlockRef],&#xA;[EstateCode])&#xA;&#xA;&#xA;select RTRIM(convert(varchar(180),&quot;ADDRESS&quot;)) AS Address,&#xA;   RTRIM(isnull(&quot;PLACE-REF&quot;,'')) AS PlaceRef,&#xA;   isnull(&quot;LOCATION-TYPE&quot;,'') AS LocationType,&#xA;   isnull(&quot;LOCATION-STS&quot;,'') AS LocationSts,&#xA;   isnull( &quot;ARREARS-OFCR&quot;,'') AS OfficerCode,&#xA;   isnull(&quot;AREA-CODE&quot;,'') AS AreaCode,&#xA;    RTRIM(substring(&quot;ADDRESS&quot;,1,CHARINDEX(';',&quot;ADDRESS&quot;,1)-1)) AS AddressLine1,&#xA;RTRIM(substring(ADDRESS,CHARINDEX(';',ADDRESS,1) + 1, (CHARINDEX(';',ADDRESS,(CHARINDEX(';',ADDRESS,1)+ 1)))- CHARINDEX(';',ADDRESS,1)-1)) as AddressLine2,&#xA;RTRIM(SUBSTRING(ADDRESS,CHARINDEX(';',ADDRESS,(CHARINDEX(';',ADDRESS,1)+1))+1,(CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1)&#xA;                                            -CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,1)+ 1))-1)) as AddressLine3,&#xA;     RTRIM(SUBSTRING(ADDRESS,CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1)+1,(CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS,&#xA; CHARINDEX(';',ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1) + 1)-CHARINDEX(';', ADDRESS,CHARINDEX(';', ADDRESS,CHARINDEX(';',ADDRESS) + 1) + 1))-1)) as AddressLine4,&#xA;  RTRIM(RIGHT(ADDRESS,CHARINDEX(';', REVERSE(ADDRESS)) - 1)) AS AddressLine5,&#xA;  RTRIM(isnull(&quot;TOWN&quot;,'')) AS Town,&#xA;    RTRIM(isnull(&quot;POST-CODE&quot;,'')) AS PostCode,&#xA;    RTRIM(isnull(&quot;PERSON-REF&quot;,'')) AS PersonRef,&#xA;    isnull(&quot;HEAT-CODE&quot;,'') AS HeatCode, &#xA;    isnull(&quot;BEDROOMS&quot;,'') AS Bedrooms,&#xA;    RTRIM(isnull(&quot;SCHEME&quot;,'')) AS Scheme, &#xA;    isnull(&quot;BUILDING-TYPE&quot;,'') AS BuildingType,&#xA;    isnull(&quot;FLOOR&quot;,'') AS &quot;Floor&quot;, &#xA;    isnull(&quot;MAX-OCCUPANTS&quot;,'') AS MaxOccupants, &#xA;    isnull(&quot;MGT-AREA&quot;,'') AS MgtArea, &#xA;    isnull(&quot;RESP-OFFICER&quot;,'') AS RespOfficer, &#xA;    isnull(&quot;SUB-AREA-CODE&quot;,'') AS LettingsArea, &#xA;    RTRIM(isnull(&quot;BLOCK-REF&quot;,'')) AS BlockRef, &#xA;    isnull(&quot;ESTATE-CODE&quot;,'') AS EstateCode&#xA;&#xA;&#x9;&#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;   LOCATION.&quot;AREA-CODE&quot;,&#xA;   LOCATION.&quot;ARREARS-OFCR&quot;, &#xA;   LOCATION.&quot;BEDROOMS&quot;, &#xA;   LOCATION.&quot;BLOCK-REF&quot;, &#xA;   LOCATION.&quot;BUILDING-TYPE&quot;, &#xA;   LOCATION.&quot;FLOOR&quot;, &#xA;   LOCATION.&quot;HEAT-CODE&quot;, &#xA;   LOCATION.&quot;LOCATION-TYPE&quot;, &#xA;   LOCATION.&quot;LOCATION-STS&quot;, &#xA;   LOCATION.&quot;MAX-OCCUPANTS&quot;, &#xA;   LOCATION.&quot;MGT-AREA&quot;, &#xA;   LOCATION.&quot;PLACE-REF&quot;, &#xA;   LOCATION.&quot;RENT-GROUP&quot;, &#xA;   LOCATION.&quot;RESP-OFFICER&quot;, &#xA;   LOCATION.&quot;SCHEME&quot;, &#xA;   LOCATION.&quot;SUB-AREA-CODE&quot;, &#xA;   LOCATION.&quot;BUILD-DATE&quot;,&#xA;   LOCATION.&quot;ESTATE-CODE&quot;,&#xA;   PLACE.&quot;ADDRESS&quot;,&#xA;   PLACE.&quot;POST-CODE&quot;, &#xA;   PLACE.&quot;STREET&quot;,&#xA;   STREET.&quot;TOWN&quot;,&#xA;   TENANCY.&quot;TENANCY-REF&quot;,&#xA;   TENANCY.&quot;TNCY-STATUS&quot;, &#xA;   TNCYPERSON.&quot;PERSON-REF&quot;, &#xA;   TNCYPERSON.&quot;MAIN-CONTACT&quot;, &#xA;   TNCYPERSON.&quot;ON-TNCY&quot;&#xA; &#xA;   &#xA;   from pub.&quot;IH-LOCATION&quot; LOCATION&#xA;&#xA;  INNER JOIN pub.&quot;CO-PLACE&quot; PLACE ON&#xA;    PLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot;&#xA;  INNER JOIN pub.&quot;CO_STREET&quot; STREET ON&#xA;    STREET.&quot;STREET&quot; = PLACE.&quot;STREET&quot;&#xA;   &#xA;  LEFT OUTER JOIN&#xA;&#xA;       (pub.&quot;RE-TNCY-PLACE&quot; TNCYPLACE &#xA;  INNER JOIN pub.&quot;RE-TENANCY&quot; TENANCY ON&#xA;       TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;   and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;   AND TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#xA;  INNER JOIN pub.&quot;RE-TNCY-PERSON&quot; TNCYPERSON ON &#xA;    TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;    and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;    AND  TNCYPERSON.&quot;ON-TNCY&quot; = 1 &#xA;    AND TNCYPERSON.&quot;MAIN-CONTACT&quot; = 1 )&#xA;&#xA;ON LOCATION.&quot;PLACE-REF&quot; = TNCYPLACE.&quot;PLACE-REF&quot;&#xA;&#xA;where &#xA;LOCATION.&quot;LOCATION-STS&quot; IN  (''X'')&#xA;AND LOCATION.&quot;LOCATION-TYPE&quot; IN (''BLOCK'')&#xA;AND PLACE.&quot;INTERNAL&quot; = 1&#xA;&#xA;&#xA;    ')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 3"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{8C3CB5A2-9AA4-464C-80DE-34A28DC153BF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 3"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_BlockAddAdd Using SQL OPENQUERY ***/ &#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_BlockAddKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_BlockAddKeep;&#xA;&#xA;IF OBJECT_ID('crm_BlockAdd') IS NOT NULL EXEC sp_rename 'dbo.crm_BlockAdd', 'crm_BlockAddKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_BlockAdd', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_BlockAdd; &#xA;&#xA;use livedynamics;&#xA;CREATE TABLE [dbo].[crm_BlockAdd] (&#xA;[PlaceRef] varchar(50),&#xA;[LocationSts] varchar(50),&#xA;[LocationSubSts] varchar(50),&#xA;[RentGroup] int&#xA;)&#xA;GO&#xA;&#xA;insert into crm_BlockAdd (&#xA;[PlaceRef],&#xA;[LocationSts],&#xA;[LocationSubSts],&#xA;[RentGroup])&#xA;&#xA;&#xA;select   RTRIM(isnull(&quot;PLACE-REF&quot;,'')) AS PlaceRef,&#xA;&#x9;isnull(&quot;LOCATION-STS&quot;,'') AS LocationSts,&#xA;&#x9;isnull(&quot;SUB-STATUS&quot;,'') AS LocationSubSts,&#xA;&#x9;isnull(&quot;RENT-GROUP&quot;,'') AS RentGroup&#xA;&#xA;&#x9;&#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;   LOCATION.&quot;AREA-CODE&quot;,&#xA;   LOCATION.&quot;ARREARS-OFCR&quot;, &#xA;   LOCATION.&quot;BEDROOMS&quot;, &#xA;   LOCATION.&quot;BLOCK-REF&quot;, &#xA;   LOCATION.&quot;BUILDING-TYPE&quot;, &#xA;   LOCATION.&quot;FLOOR&quot;, &#xA;   LOCATION.&quot;HEAT-CODE&quot;, &#xA;   LOCATION.&quot;LOCATION-TYPE&quot;, &#xA;   LOCATION.&quot;LOCATION-STS&quot;, &#xA;   LOCATION.&quot;MAX-OCCUPANTS&quot;, &#xA;   LOCATION.&quot;MGT-AREA&quot;, &#xA;   LOCATION.&quot;PLACE-REF&quot;, &#xA;   LOCATION.&quot;RENT-GROUP&quot;, &#xA;   LOCATION.&quot;RESP-OFFICER&quot;, &#xA;   LOCATION.&quot;SCHEME&quot;, &#xA;   LOCATION.&quot;SUB-AREA-CODE&quot;, &#xA;   LOCATION.&quot;BUILD-DATE&quot;,&#xA;   LOCATION.&quot;ESTATE-CODE&quot;,&#xA;   LOCATION.&quot;SUB-STATUS&quot;,&#xA;   PLACE.&quot;ADDRESS&quot;,&#xA;   PLACE.&quot;POST-CODE&quot;, &#xA;   PLACE.&quot;STREET&quot;,&#xA;   STREET.&quot;TOWN&quot;,&#xA;   TENANCY.&quot;TENANCY-REF&quot;,&#xA;   TENANCY.&quot;TNCY-STATUS&quot;, &#xA;   TNCYPERSON.&quot;PERSON-REF&quot;, &#xA;   TNCYPERSON.&quot;MAIN-CONTACT&quot;, &#xA;   TNCYPERSON.&quot;ON-TNCY&quot;&#xA; &#xA;   &#xA;   from pub.&quot;IH-LOCATION&quot; LOCATION&#xA;&#xA;  INNER JOIN pub.&quot;CO-PLACE&quot; PLACE ON&#xA;    PLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot;&#xA;  INNER JOIN pub.&quot;CO_STREET&quot; STREET ON&#xA;    STREET.&quot;STREET&quot; = PLACE.&quot;STREET&quot;&#xA;   &#xA;  LEFT OUTER JOIN&#xA;&#xA;       (pub.&quot;RE-TNCY-PLACE&quot; TNCYPLACE &#xA;  INNER JOIN pub.&quot;RE-TENANCY&quot; TENANCY ON&#xA;       TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;   and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;   AND TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#xA;  INNER JOIN pub.&quot;RE-TNCY-PERSON&quot; TNCYPERSON ON &#xA;    TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;    and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;    AND  TNCYPERSON.&quot;ON-TNCY&quot; = 1 &#xA;    AND TNCYPERSON.&quot;MAIN-CONTACT&quot; = 1 )&#xA;&#xA;ON LOCATION.&quot;PLACE-REF&quot; = TNCYPLACE.&quot;PLACE-REF&quot;&#xA;&#xA;where &#xA;LOCATION.&quot;LOCATION-STS&quot; IN  (''X'')&#xA;AND LOCATION.&quot;LOCATION-TYPE&quot; IN (''BLOCK'')&#xA;AND PLACE.&quot;INTERNAL&quot; = 1&#xA;&#xA;&#xA;    ')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 4"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{CFEF989E-8DF4-42D6-8BC1-BEF630AB661E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 4"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** crm_PropertyAdd Using SQL OPENQUERY ***/ &#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_PropertyAddKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_PropertyAddKeep;&#xA;&#xA;IF OBJECT_ID('crm_PropertyAdd') IS NOT NULL EXEC sp_rename 'dbo.crm_PropertyAdd', 'crm_PropertyAddKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_PropertyAdd', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_PropertyAdd; &#xA;&#xA;&#xA;CREATE TABLE [dbo].[crm_PropertyAdd] (&#xA;[PlaceRef] varchar(50),&#xA;[LocationSts] varchar(50),&#xA;[LocationSubSts] varchar(50),&#xA;[RentGroup] int&#xA;)&#xA;GO&#xA;&#xA;&#xA;insert into crm_PropertyAdd (&#xA;[PlaceRef],&#xA;[LocationSts],&#xA;[LocationSubSts],&#xA;[RentGroup]&#xA;&#xA; )&#xA;&#xA;&#xA;select &#xA;&#x9;RTRIM(isnull(&quot;PLACE-REF&quot;,'')) AS PlaceRef,&#xA;&#x9;isnull(&quot;LOCATION-STS&quot;,'') AS LocationSts,&#xA;&#x9;isnull(&quot;SUB-STATUS&quot;,'') AS LocationSubSts,&#xA;&#x9;isnull(&quot;RENT-GROUP&quot;,'') AS RentGroup&#xA; &#xA; &#xA;from Openquery(LIVE_OH, &#xA;  'select &#xA;   LOCATION.&quot;AREA-CODE&quot;,&#xA;   LOCATION.&quot;ARREARS-OFCR&quot;, &#xA;   LOCATION.&quot;BEDROOMS&quot;, &#xA;   LOCATION.&quot;BLOCK-REF&quot;, &#xA;   LOCATION.&quot;BUILDING-TYPE&quot;, &#xA;   LOCATION.&quot;ESTATE-CODE&quot;,&#xA;   LOCATION.&quot;FLOOR&quot;, &#xA;   LOCATION.&quot;HEAT-CODE&quot;, &#xA;   LOCATION.&quot;LOCATION-TYPE&quot;, &#xA;   LOCATION.&quot;LOCATION-STS&quot;, &#xA;   LOCATION.&quot;MAX-OCCUPANTS&quot;, &#xA;   LOCATION.&quot;MGT-AREA&quot;, &#xA;   LOCATION.&quot;PLACE-REF&quot;, &#xA;   LOCATION.&quot;RENT-GROUP&quot;, &#xA;   LOCATION.&quot;RESP-OFFICER&quot;, &#xA;   LOCATION.&quot;SCHEME&quot;, &#xA;   LOCATION.&quot;SUB-AREA-CODE&quot;, &#xA;   LOCATION.&quot;BUILD-DATE&quot;,&#xA;   LOCATION.&quot;SUB-STATUS&quot;, &#xA;   PLACE.&quot;ADDRESS&quot;,&#xA;   PLACE.&quot;POST-CODE&quot;, &#xA;   PLACE.&quot;STREET&quot;,&#xA;   STREET.&quot;TOWN&quot;,&#xA;   TENANCY.&quot;TENANCY-REF&quot;,&#xA;   TENANCY.&quot;TNCY-STATUS&quot;, &#xA;   TNCYPERSON.&quot;PERSON-REF&quot;, &#xA;   TNCYPERSON.&quot;MAIN-CONTACT&quot;, &#xA;   TNCYPERSON.&quot;ON-TNCY&quot;&#xA;  &#xA; &#xA;   &#xA;   from pub.&quot;IH-LOCATION&quot; LOCATION&#xA;&#xA;  INNER JOIN pub.&quot;CO-PLACE&quot; PLACE ON&#xA;    PLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot;&#xA;  INNER JOIN pub.&quot;CO_STREET&quot; STREET ON&#xA;    STREET.&quot;STREET&quot; = PLACE.&quot;STREET&quot;&#xA;   &#xA;  LEFT OUTER JOIN&#xA;&#xA;       (pub.&quot;RE-TNCY-PLACE&quot; TNCYPLACE &#xA;  INNER JOIN pub.&quot;RE-TENANCY&quot; TENANCY ON&#xA;       TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;   and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;   AND TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#xA;  INNER JOIN pub.&quot;RE-TNCY-PERSON&quot; TNCYPERSON ON &#xA;    TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;    and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;    AND  TNCYPERSON.&quot;ON-TNCY&quot; = 1 &#xA;    AND TNCYPERSON.&quot;MAIN-CONTACT&quot; = 1 )&#xA;&#xA;ON LOCATION.&quot;PLACE-REF&quot; = TNCYPLACE.&quot;PLACE-REF&quot;&#xA;&#xA;where &#xA;LOCATION.&quot;LOCATION-STS&quot; IN  (''O'',''V'')&#xA;AND LOCATION.&quot;LOCATION-TYPE&quot; IN (''BLOCK'',''BUNGALOW'',''FLAT'',''HOUSE'',''MAISONET'',''ROOM'',''STUDIO'')&#xA;AND LOCATION.&quot;MGT-AREA&quot; IN (''1'',''2'',''3'',''4'',''5'',''6'',''7'',''8'',''9'',''10'',''CARE'')&#xA;AND PLACE.&quot;INTERNAL&quot; = 1&#xA;&#xA;&#xA;    ')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 5"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Delete rows where values = NULL or blank and then update other rows to certain values"
+      DTS:DTSID="{0F4E6A69-326F-4053-9179-3E1612930DFD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 5"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete blank lines from livedynamics ***/&#xA;USE livedynamics;&#xA;&#xA;Delete from crm_block where PlaceRef is null OR PlaceRef='';&#xA;Delete from crm_block where PlaceRef NOT LIKE '%-%';&#xA;&#xA;Delete from crm_PropertyAdd where PlaceRef is null OR PlaceRef='';&#xA;&#xA;&#xA;Delete from crm_blockAdd where PlaceRef is null OR PlaceRef='';&#xA;Delete from crm_blockAdd where PlaceRef NOT LIKE '%-%';&#xA;&#xA;&#xA;/*** ALTER tables to ADD 5 remaining colums and set ****/&#xA;&#xA;Use livedynamics;&#xA;&#xA;/** crm_block ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_block&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_block set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_block set ImportType='C';&#xA;update crm_block set SubmittedOn= GetDate();&#xA;update crm_block set Importstatus='Pending';&#xA;&#xA;/** End crm_block  **/&#xA;&#xA;&#xA;/*** crm_PropertyAdd ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_PropertyAdd&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_PropertyAdd set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_PropertyAdd set ImportType='U';&#xA;update crm_PropertyAdd set SubmittedOn= GetDate();&#xA;update crm_PropertyAdd set Importstatus='Pending';&#xA;&#xA;/** End crm_PropertyAdd **/&#xA;&#xA;use livedynamics;&#xA;/** crm_BlockAdd ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_BlockAdd&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_BlockAdd set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_BlockAdd set ImportType='U';&#xA;update crm_BlockAdd set SubmittedOn= GetDate();&#xA;update crm_BlockAdd set Importstatus='Pending';&#xA;&#xA;/** End crm_BlockAdd **/&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 6"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Sets postcode to NOPOSTCODE where no postcode exists"
+      DTS:DTSID="{F838968C-9216-41D6-ADEE-C4F95AE3188C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 6"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="use livedynamics;&#xA;&#xA;update crm_block set postcode='No Postcode' where postcode=''" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8EE10B45-AD91-4C1B-A989-665C214B0C46}"
+      DTS:From="Package\Execute SQL Task - Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Step 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F7CBA4AE-58B8-4362-9A51-49051E978163}"
+      DTS:From="Package\Execute SQL Task - Step 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute SQL Task - Step 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{E20CD4CD-DA3E-4746-835D-1F1ADDB0099C}"
+      DTS:From="Package\Execute SQL Task - Step 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Execute SQL Task - Step 3" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{669DCCEB-6E38-4D9B-A7EF-FAF0B7CFB4F8}"
+      DTS:From="Package\Execute SQL Task - Step 3"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Execute SQL Task - Step 4" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{F6F4233A-17E7-4228-A4A8-5E3B00A67549}"
+      DTS:From="Package\Execute SQL Task - Step 4"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Execute SQL Task - Step 5" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{617B43CE-11E1-4691-BD1F-771CACCB71B7}"
+      DTS:From="Package\Execute SQL Task - Step 5"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Execute SQL Task - Step 6" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 0"
+          TopLeft="79,43" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 1"
+          TopLeft="259,156" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="181,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="180,71"
+              Start="0,0"
+              End="180,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.5"
+                    Point2="0,35.5"
+                    Point3="4,35.5" />
+                  <mssgle:LineSegment
+                    End="176,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="176,35.5"
+                    Point2="180,35.5"
+                    Point3="180,39.5" />
+                  <mssgle:LineSegment
+                    End="180,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 2"
+          TopLeft="479,255" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="361,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="220,57"
+              Start="0,0"
+              End="220,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="4,28.5" />
+                  <mssgle:LineSegment
+                    End="216,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="216,28.5"
+                    Point2="220,28.5"
+                    Point3="220,32.5" />
+                  <mssgle:LineSegment
+                    End="220,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 3"
+          TopLeft="668,348" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="581,297">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="189,51"
+              Start="0,0"
+              End="189,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5"
+                    Point2="0,25.5"
+                    Point3="4,25.5" />
+                  <mssgle:LineSegment
+                    End="185,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="185,25.5"
+                    Point2="189,25.5"
+                    Point3="189,29.5" />
+                  <mssgle:LineSegment
+                    End="189,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 4"
+          TopLeft="825,451" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="770,390">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="157,61"
+              Start="0,0"
+              End="157,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="4,30.5" />
+                  <mssgle:LineSegment
+                    End="153,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="153,30.5"
+                    Point2="157,30.5"
+                    Point3="157,34.5" />
+                  <mssgle:LineSegment
+                    End="157,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 5"
+          TopLeft="1008,545" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="927,493">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="183,52"
+              Start="0,0"
+              End="183,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22"
+                    Point2="0,26"
+                    Point3="4,26" />
+                  <mssgle:LineSegment
+                    End="179,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="179,26"
+                    Point2="183,26"
+                    Point3="183,30" />
+                  <mssgle:LineSegment
+                    End="183,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 6"
+          TopLeft="845,621" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="1110,587">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-163,34"
+              Start="0,0"
+              End="-163,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="-4,17" />
+                  <mssgle:LineSegment
+                    End="-159,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-159,17"
+                    Point2="-163,17"
+                    Point3="-163,21" />
+                  <mssgle:LineSegment
+                    End="-163,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

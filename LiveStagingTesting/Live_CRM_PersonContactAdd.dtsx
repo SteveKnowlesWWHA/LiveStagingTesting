@@ -1,0 +1,249 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/10/2019 11:31:00 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{C00D3278-B53B-4A28-B154-CB5A6EC29676}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_CRM_PersonContactAdd"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{038B0CCE-C817-4228-95D4-91B043B19A24}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{91525650-C099-4F57-B46F-9B9ABBEC25DF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Create New crm_PersonContactAdd using OPENQUERY SQL***/&#xA;/*** Including RES PROF ***/&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_PersonContactAddKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_PersonContactAddKeep;&#xA;&#xA;IF OBJECT_ID('crm_PersonContactAdd') IS NOT NULL EXEC sp_rename 'dbo.crm_PersonContactAdd', 'crm_PersonContactAddKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_PersonContactAdd', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_PersonContactAdd; &#xA;&#xA;&#xA;CREATE TABLE [dbo].[crm_PersonContactAdd] (&#xA;[Forenames] varchar(50),&#xA;[Surname] varchar(50),&#xA;[ContactDetails] varchar(100),&#xA;[Gender] varchar(50),&#xA;[Age] int,&#xA;[OriginCode] varchar(50),&#xA;[DOB] datetime,&#xA;[PersonRef] varchar(50),&#xA;[DateOfDeath] datetime,&#xA;[SEXOCode] varchar(50),&#xA;[Religion] varchar(50),&#xA;[NationalInsurance] varchar(50),&#xA;[PotentiallyViolent] bit,&#xA;[Language] varchar(50),&#xA;[PersonTitle] varchar(50),&#xA;[TenancyRef] varchar(50),&#xA;[PlaceRef] varchar(50),&#xA;[ContactType] varchar(50),&#xA;[Priority] varchar(50)&#xA;)&#xA;GO&#xA;&#xA; &#xA;insert into crm_PersonContactAdd (&#xA;[Forenames],&#xA;[Surname],&#xA;[ContactDetails],&#xA;[Gender],&#xA;[Age],&#xA;[OriginCode],&#xA;[DOB],&#xA;[PersonRef],&#xA;[DateOfDeath],&#xA;[SEXOCode],&#xA;[Religion],&#xA;[NationalInsurance],&#xA;[PotentiallyViolent],&#xA;[Language],&#xA;[PersonTitle],&#xA;[TenancyRef],&#xA;[PlaceRef],&#xA;[ContactType],&#xA;[Priority])&#xA;&#xA;select isnull(FORENAMES,'') AS Forenames,&#xA;&#x9;isnull(SURNAME,'') AS Surname,&#xA;&#x9;LTRIM(isnull([CONTACT-DETAILS],'')) AS ContactDetails,&#xA;&#x9;isnull(GENDER,'') AS Gender,&#xA;&#x9;DATEDIFF(hour,[D-O-B],GETDATE())/8766 AS Age,&#xA;&#x9;isnull([ORIGIN-CODE],'') AS OriginCode,&#xA;&#x9;[D-O-B] AS DOB,&#xA;&#x9;RTRIM([PERSON-REF]) AS PersonRef,&#xA;&#x9;[DATE-OF-DEATH] AS DateOfDeath,&#xA;&#x9;isnull(SEXO,'') AS SEXOCode,&#xA;&#x9;isnull(BREL,'') AS Religion,&#xA;&#x9;isnull([NHI-NO],'') AS NationalInsurance,&#xA;&#x9;isnull([POTENTIALLY-VIOLENT],'') AS PotentiallyViolent,&#xA;&#x9;isnull(Lang,'') AS Language,&#xA;&#x9;isnull([PERSON-TITLE],'') AS PersonTitle,&#xA;&#x9;isnull([TENANCY-REF],'') AS TenancyRef,&#xA;&#x9;isnull([PLACE-REF],'') AS PlaceRef,&#xA;&#x9;isnull([CONTACT-TYPE],'') AS ContactType,&#xA;&#x9;[PRIORITY] AS Priority&#xA;&#xA;&#x9;from Openquery(LIVE_OH, &#xA;&#x9;&#xA;'select &#xA;&#x9;TENANCY.&quot;TENANCY-REF&quot;,&#xA;&#x9;TENANCY.&quot;TNCY-STATUS&quot;,&#xA;&#x9;TNCYPLACE.&quot;PLACE-REF&quot;,&#xA;&#x9;TNCYPERSON.&quot;PERSON-REF&quot;,&#xA;&#x9;TNCYPERSON.&quot;ON-TNCY&quot;,&#xA;&#x9;TNCYPERSON.&quot;TNCY-SYS-REF&quot;,&#xA;    TNCYPERSON.&quot;MAIN-CONTACT&quot;,&#xA;&#x9;TNCYPERSON.&quot;END-DATE&quot;,&#xA;    PERSON.&quot;D-O-B&quot;, &#xA;    PERSON.&quot;COMPANY&quot;, &#xA;&#x9;PERSON.&quot;DATE-OF-DEATH&quot;, &#xA;&#x9;PERSON.DECEASED, &#xA;&#x9;PERSON.FORENAMES, &#xA;&#x9;PERSON.GENDER, &#xA;&#x9;PERSON.INITIALS, &#xA;&#x9;PERSON.&quot;ORIGIN-CODE&quot;, &#xA;&#x9;PERSON.&quot;PERSON-TITLE&quot;, &#xA;&#x9;PERSON.SURNAME,&#xA;&#x9;PERSON.&quot;NHI-NO&quot;,&#xA;&#x9;PERSON.&quot;POTENTIALLY-VIOLENT&quot;, &#xA;&#x9;PERSONCONTACT.&quot;CONTACT-TYPE&quot;,&#xA;&#x9;LEFT(PERSONCONTACT.&quot;CONTACT-DETAILS&quot;,100) &quot;CONTACT-DETAILS&quot;,&#xA;&#x9;PERSONCONTACT.&quot;PRIORITY&quot;,&#xA;&#x9;PERSONDESCATTRDLAN.&quot;SUB-ATTRIB-CODE&quot; AS Lang,&#xA;&#x9;PERSONDESCATTRBREL.&quot;SUB-ATTRIB-CODE&quot; AS BREL,&#xA;&#x9;PERSONDESCATTRSEXO.&quot;SUB-ATTRIB-CODE&quot; AS SEXO&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;from PUB.&quot;RE-TNCY-PERSON&quot; TNCYPERSON,&#xA;&#x9;PUB.&quot;IH-LOCATION&quot; LOCATION,&#xA;&#x9;PUB.&quot;RE-TNCY-PLACE&quot; TNCYPLACE,&#xA;&#x9;PUB.&quot;RE-TENANCY&quot; TENANCY,&#xA;&#x9;PUB.&quot;CO-PERSON&quot; PERSON&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9;  PUB.&quot;CO-PERSON-CONTACT&quot; PERSONCONTACT ON  PERSON.&quot;PERSON-REF&quot; = PERSONCONTACT.&quot;PERSON-REF&quot;  &#xA;&#x9;&#x9;&#xA;&#x9;&#x9;AND &#xA;&#x9;  (&#xA;&#x9;&#x9;  ( &#xA;&#x9;&#x9;&#x9;PERSONCONTACT.&quot;CONTACT-TYPE&quot; = ''TEL'' &#xA;&#x9;&#x9;&#x9;AND &#xA;&#x9;&#x9;PERSONCONTACT.&quot;PRIORITY&quot; &lt;&gt;1 &#xA;&#x9;&#x9;)&#xA;        OR PERSONCONTACT.&quot;CONTACT-TYPE&quot; IN (''AUD'',''BRA'',''EML'',''EMW'', ''MBL'', ''MOB'', ''WTL'',''ZBW'',''ZBT'',''NOK'')&#xA;&#x9;)&#xA;&#xA;&#x9;&#x9;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRDLAN ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRDLAN.&quot;PERSON-REF&quot; AND PERSONDESCATTRDLAN.&quot;ATTRIB-CODE&quot; = ''DLAN'' &#xA;&#x9; &#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRBREL ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRBREL.&quot;PERSON-REF&quot; AND PERSONDESCATTRBREL.&quot;ATTRIB-CODE&quot; = ''BREL'' &#xA;&#x9;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRSEXO ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRSEXO.&quot;PERSON-REF&quot; AND PERSONDESCATTRSEXO.&quot;ATTRIB-CODE&quot; = ''SEXO'' &#xA;&#x9;&#x9;&#xA;where &#xA;&#x9;TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#x9;And LOCATION.&quot;MGT-AREA&quot; IN (''1'',''2'',''3'',''4'',''5'',''6'',''7'',''8'',''9'',''10'',''CARE'')&#xA;&#x9;and LOCATION.&quot;LOCATION-STS&quot; IN (''O'',''V'')&#xA;&#x9;and LOCATION.&quot;LOCATION-TYPE&quot; IN (''BLOCK'',''BUNGALOW'', ''FLAT'', ''HOUSE'', ''MAISONET'', ''ROOM'',''STUDIO'')&#xA;&#x9;&#x9;and TNCYPERSON.&quot;PERSON-REF&quot; NOT IN (''1000182'', &#xA;&#x9;&#x9;&#x9;&#x9;''1133011'', &#xA;&#x9;&#x9;&#x9;&#x9;''1142667'', &#xA;&#x9;&#x9;&#x9;&#x9;''12253321990076'', &#xA;&#x9;&#x9;&#x9;&#x9;''13111499990023'', &#xA;&#x9;&#x9;&#x9;&#x9;''15143313990557'', &#xA;&#x9;&#x9;&#x9;&#x9;''18112311990199'', &#xA;&#x9;&#x9;&#x9;&#x9;''18112314230009'', &#xA;&#x9;&#x9;&#x9;&#x9;''18112314280001'', &#xA;&#x9;&#x9;&#x9;&#x9;''23152223990013'', &#xA;&#x9;&#x9;&#x9;&#x9;''4139127'', &#xA;&#x9;&#x9;&#x9;&#x9;''4140699'')&#xA;&#x9;&#xA;&#x9;and TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;&#x9;and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;&#x9;and TNCYPLACE.&quot;ORG-CODE&quot; = LOCATION.&quot;ORG-CODE&quot; &#xA;&#x9;and TNCYPLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot; &#xA;&#x9;and TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;&#x9;and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;&#x9;and TNCYPERSON.&quot;PERSON-REF&quot; =PERSON.&quot;PERSON-REF&quot;&#xA;&#x9;&#xA;&#xA;&#x9;')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Sets values on rows where date has year 1899 and sets to NULL"
+      DTS:DTSID="{EBBFADCC-FEC7-4E4F-B0D4-AFF01C235671}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="use livedynamics;&#xA;Delete from crm_personContactAdd where PersonRef is null OR PersonRef='';&#xA;&#xA;Update [crm_personContactAdd] set [DOB]= NULL where [DOB]='1899-12-30 00:00:00.000';&#xA;Update [crm_personContactAdd] set [DateOfDeath]= NULL where [DateOfDeath]='1899-12-30 00:00:00.000';&#xA;&#xA;Update [crm_personContactAdd] set [Priority]= '' where [Priority] IS NULL;&#xA;&#xA;Update [crm_personContactAdd] set [Age]= 0 where [Age] IS NULL;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 2"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Drops keep table, adds information into contacts table, then performs update and inserts back into table"
+      DTS:DTSID="{F07BBDB9-74E2-41FF-9688-38642D1D3BA0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 2"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="Use livedynamics;;&#xA;&#xA;--How this works&#xA;--it uses the MWL_contacts and crm_personContact tables.&#xA;--1)clear the tables out&#xA;--2)using the mwl_contacts table as a dump, put all of the contact details types together and rank them&#xA;--3) select the details from crm_contactadd, then select the various options from the mwl_contacts for the different contact types, then the rank to get them into columns&#xA;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_personContactKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_personContactKeep&#xA;&#xA;select * into&#xA; crm_personContactKeep&#xA;from  crm_personContact &#xA;&#xA;&#xA;delete from mwl_contacts&#xA;delete from crm_personContact&#xA;&#xA;&#xA;&#xA;--2)using the mwl_contacts table as a dump, put all of the contact details types together and rank them&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by personref,&#xA;case when contacttype='mbl' then 0 else 1 end ,convert(int,priority) ) as therank,&#xA;personref, contactdetails,'mob' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('mbl','mob')&#xA;) as o order by personref, therank&#xA;&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'tel' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('tel')&#xA;) as o order by personref, therank&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'eml' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('eml')&#xA;) as o order by personref, therank&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'emw' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('emw')&#xA;) as o order by personref, therank&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'wtl' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('wtl')&#xA;) as o order by personref, therank&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'aud' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('aud')&#xA;) as o order by personref, therank&#xA;&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'ZBW' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('ZBW')&#xA;) as o order by personref, therank&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'ZBT' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('ZBT')&#xA;) as o order by personref, therank&#xA;&#xA;insert into mwl_contacts(therank, personref,contactdetails,thetype)&#xA;select * from (&#xA;select rank () over ( partition by personref order by convert(int,priority))  as therank,&#xA;personref, contactdetails,'NOK' as thetype  from crm_PersonContactAdd &#xA;where isnull(ContactDetails,'') !='' and contacttype in ('NOK')&#xA;) as o order by personref, therank&#xA;&#xA;&#xA;--3) select the details from crm_contactadd, then select the various options from the mwl_contacts for the different contact types, then the rank to get them into columns&#xA;insert into crm_personContact(Forenames, Surname, Gender, Age, OriginCode, DOB, PersonRef, DateOfDeath, SEXOCode, Religion, NationalInsurance, PotentiallyViolent, Language, &#xA;PersonTitle, TenancyRef, PlaceRef, tel1, tel2, mob1, mob2, mob3, mob4, wtl1,wtl2,eml1,eml2,emw,aud,ZBW,ZBT,NOK)&#xA;&#xA;SELECT     distinct Forenames, Surname, Gender, Age, OriginCode, DOB, PersonRef, DateOfDeath, SEXOCode, Religion, NationalInsurance, PotentiallyViolent, Language, &#xA;PersonTitle, TenancyRef, PlaceRef ,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='tel' and therank=1) as tel1,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='tel' and therank=2) as tel2,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='mob' and therank=1) as mob1,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='mob' and therank=2) as mob2,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='mob' and therank=3) as mob3,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='mob' and therank=4) as mob4,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='wtl' and therank=1) as wtl1,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='wtl' and therank=2) as wtl2,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='eml' and therank=1) as eml1,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='eml' and therank=2) as eml2,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='emw' and therank=1) as emw,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='aud' and therank=1) as aud,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='ZBW' and therank=1) as ZBW,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='ZBT' and therank=1) as ZBT,&#xA;(select  top 1 ContactDetails from mwl_contacts as cons where cons.personref=crm_PersonContactAdd.PersonRef and thetype='NOK' and therank=1) as NOK&#xA;from crm_PersonContactAdd&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 3"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Updates certain rows based on column information"
+      DTS:DTSID="{6B2078B2-F71B-456B-BD93-F942E003C815}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 3"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/** update the importer columns **/&#xA;use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_PersonContact set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_PersonContact set ImportType='C';&#xA;update crm_PersonContact set SubmittedOn= GetDate();&#xA;update crm_PersonContact set Importstatus='Pending';" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{49A39E5B-53D4-4E8E-9F17-32A720C156C1}"
+      DTS:From="Package\Execute SQL Task - Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Step 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{97A2B57D-2B73-41A4-9F1D-0D92D805880C}"
+      DTS:From="Package\Execute SQL Task - Step 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Execute SQL Task - Step 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{31D6E491-243B-42AF-9F75-E400CB315D00}"
+      DTS:From="Package\Execute SQL Task - Step 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Execute SQL Task - Step 3" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 0"
+          TopLeft="126,57" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 1"
+          TopLeft="347,160" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="228,99">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="221,61"
+              Start="0,0"
+              End="221,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="4,30.5" />
+                  <mssgle:LineSegment
+                    End="217,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="217,30.5"
+                    Point2="221,30.5"
+                    Point3="221,34.5" />
+                  <mssgle:LineSegment
+                    End="221,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 2"
+          TopLeft="631,287" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="449,202">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="284,85"
+              Start="0,0"
+              End="284,77.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.5"
+                    Point2="0,42.5"
+                    Point3="4,42.5" />
+                  <mssgle:LineSegment
+                    End="280,42.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="280,42.5"
+                    Point2="284,42.5"
+                    Point3="284,46.5" />
+                  <mssgle:LineSegment
+                    End="284,77.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 3"
+          TopLeft="794,446" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="733,329">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163,117"
+              Start="0,0"
+              End="163,109.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.5"
+                    Point2="0,58.5"
+                    Point3="4,58.5" />
+                  <mssgle:LineSegment
+                    End="159,58.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159,58.5"
+                    Point2="163,58.5"
+                    Point3="163,62.5" />
+                  <mssgle:LineSegment
+                    End="163,109.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/10/2019 10:52:12 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PC2RN3MJ2"
+  DTS:CreatorName="WWHA\Hal.Jordan"
+  DTS:DTSID="{68843DE8-AA61-4C6E-89A7-8054116D2AE1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Live_CRM_Person"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{60397CC2-9575-4DC5-A5B3-F29BD041A18F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 0"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts "
+      DTS:DTSID="{229C034D-227D-460D-B1CA-932E3A48EFFD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 0"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Create New crm_Person using OPENQUERY SQL ***/&#xA;&#xA;use livedynamics;&#xA;&#xA;--1)clear the table out&#xA;IF OBJECT_ID('crm_PersonKeep', 'U') IS NOT NULL&#xA;  DROP TABLE  crm_PersonKeep;&#xA;&#xA;IF OBJECT_ID('crm_Person') IS NOT NULL EXEC sp_rename 'dbo.crm_Person', 'crm_personKEEP';&#xA;&#xA;IF OBJECT_ID('dbo.crm_Person', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.crm_Person; &#xA;&#xA;&#xA;CREATE TABLE [dbo].[crm_Person] (&#xA;[Forenames] varchar(50),&#xA;[Surname] varchar(50),&#xA;[HomePhone] varchar(50),&#xA;[Gender] varchar(50),&#xA;[Age] int,&#xA;[OriginCode] varchar(50),&#xA;[DOB] datetime,&#xA;[PersonRef] varchar(50),&#xA;[DateOfDeath] datetime,&#xA;[SEXOCode] varchar(50),&#xA;[Religion] varchar(50),&#xA;[NationalInsurance] varchar(50),&#xA;[PotentiallyViolent] bit,&#xA;[Language] varchar(50),&#xA;[PersonTitle] varchar(50),&#xA;[TenancyRef] varchar(50),&#xA;[PlaceRef] varchar(50),&#xA;[Deceased] bit,&#xA;[PersonEndDate] datetime,&#xA;[OnTncy] bit,&#xA;[ZNATCode] varchar(50),&#xA;[ZWLCode] varchar(50),&#xA;[ZWCCode] varchar(50),&#xA;[ZFMCCode] bit,&#xA;[ZFMECode] bit,&#xA;[ZFMBCode] bit,&#xA;[ZFMRCode] bit,&#xA;[ZDIFCode] bit,&#xA;[ZDIFText] varchar(2000)&#xA;)&#xA;GO&#xA;&#xA;&#xA; &#xA;insert into crm_Person (&#xA;[Forenames],&#xA;[Surname],&#xA;[HomePhone],&#xA;[Gender],&#xA;[Age],&#xA;[OriginCode],&#xA;[DOB],&#xA;[PersonRef],&#xA;[DateOfDeath],&#xA;[SEXOCode],&#xA;[Religion],&#xA;[NationalInsurance],&#xA;[PotentiallyViolent],&#xA;[Language],&#xA;[PersonTitle],&#xA;[TenancyRef],&#xA;[PlaceRef],&#xA;[Deceased],&#xA;[PersonEndDate],&#xA;[OnTncy],&#xA;[ZNATCode],&#xA;[ZWLCode],&#xA;[ZWCCode],&#xA;[ZFMCCode],&#xA;[ZFMECode],&#xA;[ZFMBCode],&#xA;[ZFMRCode],&#xA;[ZDIFCode],&#xA;[ZDIFText])&#xA;&#xA;&#xA;select     isnull(FORENAMES,'') AS Forenames,&#xA;&#x9;isnull(SURNAME,'') AS Surname,&#xA;&#x9;isnull([CONTACT-DETAILS],'') AS HomePhone,&#xA;&#x9;isnull(GENDER,'') AS Gender,&#xA;&#x9;DATEDIFF(hour,[D-O-B],GETDATE())/8766 AS Age,&#xA;&#x9;isnull([ORIGIN-CODE],'') AS OriginCode,&#xA;&#x9;[D-O-B] AS DOB,&#xA;&#x9;RTRIM([PERSON-REF]) AS PersonRef,&#xA;&#x9;[DATE-OF-DEATH] AS DateOfDeath,&#xA;&#x9;isnull(SEXO,'') AS SEXOCode,&#xA;&#x9;isnull(BREL,'') AS Religion,&#xA;&#x9;isnull([NHI-NO],'') AS NationalInsurance,&#xA;&#x9;isnull([POTENTIALLY-VIOLENT],'') AS PotentiallyViolent,&#xA;&#x9;isnull(Lang,'') AS Language,&#xA;&#x9;isnull([PERSON-TITLE],'') AS PersonTitle,&#xA;&#x9;isnull([TENANCY-REF],'') AS TenancyRef,&#xA;&#x9;isnull([PLACE-REF],'') AS PlaceRef,&#xA;&#x9;isnull(DECEASED,'') AS Deceased,&#xA;&#x9;[END-DATE] AS PersonEndDate,&#xA;&#x9;isnull([ON-TNCY],'') AS OnTncy,&#xA;&#x9;isnull(ZNAT,'') AS ZNATCode,&#xA;&#x9;isnull(ZWL,'') AS ZWLCode,&#xA;&#x9;isnull(ZWC,'') AS ZWCCode,&#xA;&#x9;ZFMC AS ZFMCCode,&#xA;&#x9;ZFME AS ZFMECode,&#xA;&#x9;ZFMB AS ZFMBCode,&#xA;&#x9;ZFMR AS ZFMRCode,&#xA;&#x9;ZDIF AS ZDIFCode,&#xA;&#x9;ZDIFText AS ZDIFText&#xA;&#xA;&#xA;&#x9;&#xA;&#xA;&#x9;from Openquery(LIVE_OH, &#xA;&#xA;&#xA;'select &#xA;&#x9;TENANCY.&quot;TENANCY-REF&quot;,&#xA;&#x9;TENANCY.&quot;TNCY-STATUS&quot;,&#xA;&#x9;TNCYPLACE.&quot;PLACE-REF&quot;,&#xA;&#x9;TNCYPERSON.&quot;PERSON-REF&quot;,&#xA;&#x9;TNCYPERSON.&quot;ON-TNCY&quot;,&#xA;&#x9;TNCYPERSON.&quot;TNCY-SYS-REF&quot;,&#xA;    TNCYPERSON.&quot;MAIN-CONTACT&quot;,&#xA;&#x9;TNCYPERSON.&quot;END-DATE&quot;,&#xA;    PERSON.&quot;D-O-B&quot;, &#xA;    PERSON.&quot;COMPANY&quot;, &#xA;&#x9;PERSON.&quot;DATE-OF-DEATH&quot;, &#xA;&#x9;PERSON.DECEASED, &#xA;&#x9;PERSON.FORENAMES, &#xA;&#x9;PERSON.GENDER, &#xA;&#x9;PERSON.INITIALS, &#xA;&#x9;PERSON.&quot;ORIGIN-CODE&quot;, &#xA;&#x9;PERSON.&quot;PERSON-TITLE&quot;, &#xA;&#x9;PERSON.SURNAME,&#xA;&#x9;PERSON.&quot;NHI-NO&quot;,&#xA;&#x9;PERSON.&quot;POTENTIALLY-VIOLENT&quot;, &#xA;&#x9;PERSONCONTACT.&quot;CONTACT-DETAILS&quot;, &#xA;&#x9;PERSONCONTACT.&quot;CONTACT-TYPE&quot;,&#xA;&#x9;PERSONDESCATTRDLAN.&quot;SUB-ATTRIB-CODE&quot; AS Lang,&#xA;&#x9;PERSONDESCATTRBREL.&quot;SUB-ATTRIB-CODE&quot; AS BREL,&#xA;&#x9;PERSONDESCATTRSEXO.&quot;SUB-ATTRIB-CODE&quot; AS SEXO,&#xA;&#x9;PERSONDESCATTRZNAT.&quot;SUB-ATTRIB-CODE&quot; AS ZNAT,&#xA;&#x9;PERSONDESCATTRZWL.&quot;SUB-ATTRIB-CODE&quot; AS ZWL,&#xA;&#x9;PERSONDESCATTRZWC.&quot;SUB-ATTRIB-CODE&quot; AS ZWC,&#xA;&#x9;PERSONDESCATTRZFMC.&quot;LOG-VALUE&quot; AS ZFMC,&#xA;&#x9;PERSONDESCATTRZFME.&quot;LOG-VALUE&quot; AS ZFME,&#xA;&#x9;PERSONDESCATTRZFMB.&quot;LOG-VALUE&quot; AS ZFMB,&#xA;&#x9;PERSONDESCATTRZFMR.&quot;LOG-VALUE&quot; AS ZFMR,&#xA;&#x9;PERSONDESCATTRZDIF.&quot;LOG-VALUE&quot; AS ZDIF,&#xA;&#x9;PERSONDESCATTRZDIF.&quot;ATTR-TEXT&quot; AS ZDIFText&#xA;&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;from PUB.&quot;RE-TNCY-PERSON&quot; TNCYPERSON,&#xA;&#x9;PUB.&quot;IH-LOCATION&quot; LOCATION,&#xA;&#x9;PUB.&quot;RE-TNCY-PLACE&quot; TNCYPLACE,&#xA;&#x9;PUB.&quot;RE-TENANCY&quot; TENANCY,&#xA;&#x9;PUB.&quot;CO-PERSON&quot; PERSON&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9;  PUB.&quot;CO-PERSON-CONTACT&quot; PERSONCONTACT ON  PERSON.&quot;PERSON-REF&quot; = PERSONCONTACT.&quot;PERSON-REF&quot; AND PERSONCONTACT.&quot;CONTACT-TYPE&quot; = ''TEL''&#xA;&#x9;and PERSONCONTACT.&quot;PRIORITY&quot; = 1&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRDLAN ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRDLAN.&quot;PERSON-REF&quot; AND PERSONDESCATTRDLAN.&quot;ATTRIB-CODE&quot; = ''DLAN'' &#xA;&#x9; &#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRBREL ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRBREL.&quot;PERSON-REF&quot; AND PERSONDESCATTRBREL.&quot;ATTRIB-CODE&quot; = ''BREL'' &#xA;&#x9;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRSEXO ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRSEXO.&quot;PERSON-REF&quot; AND PERSONDESCATTRSEXO.&quot;ATTRIB-CODE&quot; = ''SEXO'' &#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZNAT ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZNAT.&quot;PERSON-REF&quot; AND PERSONDESCATTRZNAT.&quot;ATTRIB-CODE&quot; = ''ZNAT'' &#xA;    &#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZWL ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZWL.&quot;PERSON-REF&quot; AND PERSONDESCATTRZWL.&quot;ATTRIB-CODE&quot; = ''ZWL'' &#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZWC ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZWC.&quot;PERSON-REF&quot; AND PERSONDESCATTRZWC.&quot;ATTRIB-CODE&quot; = ''ZWC'' &#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZFMC ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZFMC.&quot;PERSON-REF&quot; AND PERSONDESCATTRZFMC.&quot;ATTRIB-CODE&quot; = ''ZFMC'' &#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZFME ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZFME.&quot;PERSON-REF&quot; AND PERSONDESCATTRZFME.&quot;ATTRIB-CODE&quot; = ''ZFME'' &#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZFMB ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZFMB.&quot;PERSON-REF&quot; AND PERSONDESCATTRZFMB.&quot;ATTRIB-CODE&quot; = ''ZFMB''&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZFMR ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZFMR.&quot;PERSON-REF&quot; AND PERSONDESCATTRZFMR.&quot;ATTRIB-CODE&quot; = ''ZFMR''&#xA;&#xA;&#x9;LEFT OUTER JOIN&#xA;&#x9; PUB.&quot;IH-PERSON-DESC-ATTR&quot; PERSONDESCATTRZDIF ON PERSON.&quot;PERSON-REF&quot;=PERSONDESCATTRZDIF.&quot;PERSON-REF&quot; AND PERSONDESCATTRZDIF.&quot;ATTRIB-CODE&quot; = ''ZDIF''&#xA;&#xA;&#xA;&#x9;&#x9;&#xA;where &#xA;&#x9;TENANCY.&quot;TNCY-STATUS&quot; = ''CUR''&#xA;&#x9;And LOCATION.&quot;MGT-AREA&quot; IN (''1'',''2'',''3'',''4'',''5'',''6'',''7'',''8'',''9'',''10'',''CARE'')&#xA;&#x9;and LOCATION.&quot;LOCATION-STS&quot; IN (''O'',''V'')&#xA;&#x9;and LOCATION.&quot;LOCATION-TYPE&quot; IN (''BLOCK'',''BUNGALOW'', ''FLAT'', ''HOUSE'', ''MAISONET'', ''ROOM'',''STUDIO'')&#xA;&#x9;and TNCYPERSON.&quot;PERSON-REF&quot; NOT IN (''1000182'', &#xA;&#x9;&#x9;&#x9;&#x9;''1133011'', &#xA;&#x9;&#x9;&#x9;&#x9;''1142667'', &#xA;&#x9;&#x9;&#x9;&#x9;''4140699'')&#xA;&#x9;and TNCYPLACE.&quot;ORG-CODE&quot; = TENANCY.&quot;ORG-CODE&quot;&#xA;&#x9;and TNCYPLACE.&quot;TNCY-SYS-REF&quot; = TENANCY.&quot;TNCY-SYS-REF&quot; &#xA;&#x9;and TNCYPLACE.&quot;ORG-CODE&quot; = LOCATION.&quot;ORG-CODE&quot; &#xA;&#x9;and TNCYPLACE.&quot;PLACE-REF&quot; = LOCATION.&quot;PLACE-REF&quot; &#xA;&#x9;and TENANCY.&quot;ORG-CODE&quot; = TNCYPERSON.&quot;ORG-CODE&quot; &#xA;&#x9;and TENANCY.&quot;TNCY-SYS-REF&quot; = TNCYPERSON.&quot;TNCY-SYS-REF&quot;&#xA;&#x9;and TNCYPERSON.&quot;PERSON-REF&quot; =PERSON.&quot;PERSON-REF&quot;&#xA;&#xA;&#xA;&#x9;')&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Step 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Deletes rows based on certain values, adds additional columns and then sets dates to null where year = 1899"
+      DTS:DTSID="{F19830CE-861B-4D41-91CD-4E6529429B43}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Step 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B98F0C27-9E59-411E-8D60-D3B41EEEBFDC}"
+          SQLTask:SqlStatementSource="/*** Delete blank lines from livedynamics ***/&#xA;USE livedynamics;&#xA;Delete from crm_person where PersonRef is null OR PersonRef='';&#xA;&#xA;&#xA;/****** Script for sdetting dates to NULL  ******/&#xA;Use livedynamics;&#xA;Update [crm_person] set [DOB]= NULL where [DOB]='1899-12-30 00:00:00.000';&#xA;Update [crm_person] set [DateOfDeath]= NULL where [DateOfDeath]='1899-12-30 00:00:00.000'; &#xA;Update [crm_person] set [PersonEnddate]= NULL where [PersonEnddate]='1899-12-30 00:00:00.000';&#xA;&#xA;Update crm_person set Age=DATEDIFF(hour,DOB,GETDATE())/8766;&#xA;&#xA;&#xA;/*** Add importer columns ***/&#xA;&#xA;/** crm_Person ***/&#xA;Use livedynamics;&#xA;ALTER TABLE crm_Person&#xA;&#x9;ADD ImportTransactionId int,&#xA;&#x9;&#x9;ImportType [char] (1),&#xA;&#x9;&#x9;SubmittedOn datetime,&#xA;&#x9;&#x9;ImportStatus nvarchar (20),&#xA;&#x9;&#x9;LastImportedAttempt datetime,&#xA;&#x9;&#x9;ImportedOn datetime&#xA;GO&#xA;;&#xA;Use livedynamics;&#xA;&#xA;DECLARE @id INT&#xA;SET @id=0&#xA;update crm_Person set @id=ImportTransactionId=@id+1&#xA;GO&#xA;;&#xA;update crm_Person set ImportType='C';&#xA;update crm_Person set SubmittedOn= GetDate();&#xA;update crm_Person set Importstatus='Pending';&#xA;&#xA;/** End crm_Person **/&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C056C03F-98F7-4AEA-B8D8-416D7C8573E3}"
+      DTS:From="Package\Execute SQL Task - Step 0"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Step 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 0"
+          TopLeft="126,69" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 1"
+          TopLeft="353,214" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="228,111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="227,103"
+              Start="0,0"
+              End="227,95.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.5"
+                    Point2="0,51.5"
+                    Point3="4,51.5" />
+                  <mssgle:LineSegment
+                    End="223,51.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="223,51.5"
+                    Point2="227,51.5"
+                    Point3="227,55.5" />
+                  <mssgle:LineSegment
+                    End="227,95.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
