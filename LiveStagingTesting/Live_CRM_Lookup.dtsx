@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="6/10/2019 9:52:45 AM"
+  DTS:CreationDate="6/14/2019 2:07:48 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="PC2RN3MJ2"
   DTS:CreatorName="WWHA\Hal.Jordan"
-  DTS:DTSID="{3FBE242C-9D7D-4DE4-A9E8-22B875F42C68}"
+  DTS:DTSID="{206147AC-3BCE-4A3A-930A-9C7310BF655C}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3026.27"
   DTS:LocaleID="2057"
-  DTS:ObjectName="Live_CRM_Lookups"
+  DTS:ObjectName="Live_CRM_Lookup"
   DTS:PackageType="5"
   DTS:VersionBuild="1"
-  DTS:VersionGUID="{7CBAC893-37A1-4D61-8454-A738EBD0306E}">
+  DTS:VersionGUID="{50527809-80D9-4459-B318-C5146319B906}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -20,8 +20,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 0"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{FFA2F7D1-C74F-48EB-B5FF-EA5984A37199}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AE6F70A6-4080-469F-90E7-E4989809C567}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 0"
@@ -37,8 +37,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 1"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{9657445B-9BC4-4FC9-8AC8-57DD3A7C0F71}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{590795E4-58BA-4DC5-AE83-B69CEB5A1F25}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 1"
@@ -54,8 +54,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 10"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Deletes rows based on certain values, then where date is 1899 will set the dates to NULL"
-      DTS:DTSID="{9DD3191E-415D-4C45-8004-46B8B944A767}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6AA0BBC7-EE38-44A3-AB54-F0BBB2723A8C}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 10"
@@ -71,8 +71,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 2"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{99A06948-256C-45DF-A3A0-9B3445EA5B98}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{719D21E8-0993-4263-A542-5520B472C4AF}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 2"
@@ -88,8 +88,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 3"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{FE71842E-A846-4455-A84E-1787F3AC6138}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FBF07E9D-B00D-4E47-9C96-A39D87235183}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 3"
@@ -105,8 +105,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 4"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{67AD5FB5-6361-4EEB-A451-7DE7FCAEE633}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{4CE8F1FD-8A97-4028-B029-897D8B32F59C}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 4"
@@ -122,8 +122,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 5"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{4758306B-9C72-4EF3-9B99-04C7BF0C094C}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{17A85178-83F4-4D72-BD8A-EDB6F64176E0}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 5"
@@ -139,8 +139,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 6"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{E9A877F7-9093-4A38-A453-06C87FFC7DBA}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{64E782D3-8B49-407A-8B99-17CAC58EEAB6}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 6"
@@ -157,7 +157,7 @@
       DTS:refId="Package\Execute SQL Task - Step 7"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:DTSID="{5824A02A-6169-4F5D-8929-CF2A34E71E60}"
+      DTS:DTSID="{4D81EAC2-1D8B-45CB-801C-B27462083D16}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 7"
@@ -173,8 +173,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 8"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{7D374158-6438-4419-BAF3-566CECFF172D}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F9A0212B-C095-4DFD-975F-65543DCE9FB1}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 8"
@@ -190,8 +190,8 @@
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task - Step 9"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="if keep table exists, drops table and then renames current table to add KEEP, runs query against OH db and inserts"
-      DTS:DTSID="{42C91AAC-9460-49AC-B439-09DF3F4D11D3}"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5E94884F-2436-40D4-B458-B164272679C2}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="Execute SQL Task - Step 9"
@@ -209,7 +209,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{BABCE101-4BFD-408C-8BAC-BCDF34524EF2}"
+      DTS:DTSID="{38B12ABA-E7CA-4B7B-889A-D6528401786C}"
       DTS:From="Package\Execute SQL Task - Step 0"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -217,7 +217,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{CB36237A-CA4A-4A64-ABC0-321B1891216A}"
+      DTS:DTSID="{8BDF2626-CF51-4913-A11C-74A54A71F0BC}"
       DTS:From="Package\Execute SQL Task - Step 1"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
@@ -225,7 +225,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
-      DTS:DTSID="{132B3695-614C-4F7B-9162-82C5C2FEDA82}"
+      DTS:DTSID="{C3E11C5D-FC54-4F6D-B7F1-7D6B1AB73DE9}"
       DTS:From="Package\Execute SQL Task - Step 2"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 2"
@@ -233,7 +233,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{DB1E7175-DB72-48C6-9F36-F8CDB2BEF370}"
+      DTS:DTSID="{D4AECF03-A66C-4EBA-97FA-88BC5E76C95D}"
       DTS:From="Package\Execute SQL Task - Step 3"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
@@ -241,7 +241,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
-      DTS:DTSID="{858615BA-6FA9-41F8-B1A8-BF26508A4071}"
+      DTS:DTSID="{F3A7BA3F-FA10-4BAB-8977-6DE9A30D88B9}"
       DTS:From="Package\Execute SQL Task - Step 4"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
@@ -249,7 +249,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
-      DTS:DTSID="{7B0EB838-A8DB-403E-8C98-475CE3211E25}"
+      DTS:DTSID="{50486E09-CEA6-41DD-A6EF-D7D025FCD477}"
       DTS:From="Package\Execute SQL Task - Step 5"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
@@ -257,7 +257,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
       DTS:CreationName=""
-      DTS:DTSID="{FDBE492B-40D3-49BD-938D-8FEF1FBEEBE0}"
+      DTS:DTSID="{90CCA48F-712B-4171-93F1-EF5AB625AFF1}"
       DTS:From="Package\Execute SQL Task - Step 6"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
@@ -265,7 +265,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
       DTS:CreationName=""
-      DTS:DTSID="{BA5A828F-BC2E-4408-B0AC-2F615BC233CB}"
+      DTS:DTSID="{26F7DB50-E3FB-416B-B8AE-6BBBF33DE4E0}"
       DTS:From="Package\Execute SQL Task - Step 7"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 7"
@@ -273,7 +273,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
       DTS:CreationName=""
-      DTS:DTSID="{1EEBDB14-73A9-49CE-9712-E7F41EA4AA9B}"
+      DTS:DTSID="{813A384E-30A7-4E26-8D77-B36E1D248E63}"
       DTS:From="Package\Execute SQL Task - Step 8"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 8"
@@ -281,7 +281,7 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
       DTS:CreationName=""
-      DTS:DTSID="{CF06662E-D8E5-45ED-A0FB-8FF04277E1FE}"
+      DTS:DTSID="{73B759FE-DD65-4D10-8EBE-D3622285174C}"
       DTS:From="Package\Execute SQL Task - Step 9"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 9"
@@ -302,25 +302,25 @@
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 0"
-          TopLeft="32,11" />
+          TopLeft="27,15" />
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 1"
-          TopLeft="273,14" />
+          TopLeft="278,17" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="236,33.5">
+          TopLeft="231,37">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="37,0"
+              EndConnector="47,0"
               Start="0,0"
-              End="29.5,0">
+              End="39.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="29.5,0" />
+                    End="39.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -330,23 +330,23 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="214,43"
+          Size="204,42"
           Id="Package\Execute SQL Task - Step 2"
-          TopLeft="510,20" />
+          TopLeft="522,20" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="477,38.25">
+          TopLeft="482,39.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="33,0"
+              EndConnector="40,0"
               Start="0,0"
-              End="25.5,0">
+              End="32.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="25.5,0" />
+                    End="32.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -358,21 +358,21 @@
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 3"
-          TopLeft="778,23" />
+          TopLeft="771,23" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="724,42.75">
+          TopLeft="726,42.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="54,0"
+              EndConnector="45,0"
               Start="0,0"
-              End="46.5,0">
+              End="37.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="46.5,0" />
+                    End="37.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -384,21 +384,21 @@
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 4"
-          TopLeft="1036,25" />
+          TopLeft="1017,27" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="982,45">
+          TopLeft="975,46">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="54,0"
+              EndConnector="42,0"
               Start="0,0"
-              End="46.5,0">
+              End="34.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="46.5,0" />
+                    End="34.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -410,21 +410,21 @@
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 5"
-          TopLeft="1038,224" />
+          TopLeft="1022,140" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="1139,67">
+          TopLeft="1121.5,69">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,157"
+              EndConnector="0,71"
               Start="0,0"
-              End="0,149.5">
+              End="0,63.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,149.5" />
+                    End="0,63.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -436,21 +436,21 @@
         <NodeLayout
           Size="204,42"
           Id="Package\Execute SQL Task - Step 6"
-          TopLeft="778,228" />
+          TopLeft="715,137" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="1038,247">
+          TopLeft="1022,159.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-56,0"
+              EndConnector="-103,0"
               Start="0,0"
-              End="-48.5,0">
+              End="-95.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-48.5,0" />
+                    End="-95.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -460,23 +460,23 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="213,42"
+          Size="204,42"
           Id="Package\Execute SQL Task - Step 7"
-          TopLeft="531,229" />
+          TopLeft="402,135" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="778,249.5">
+          TopLeft="715,157">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-34,0"
+              EndConnector="-109,0"
               Start="0,0"
-              End="-26.5,0">
+              End="-101.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-26.5,0" />
+                    End="-101.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -486,23 +486,23 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="217,42"
+          Size="204,42"
           Id="Package\Execute SQL Task - Step 8"
-          TopLeft="276,228" />
+          TopLeft="109,136" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="531,249.5">
+          TopLeft="402,156.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-38,0"
+              EndConnector="-89,0"
               Start="0,0"
-              End="-30.5,0">
+              End="-81.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-30.5,0" />
+                    End="-81.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -512,23 +512,23 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="217,42"
+          Size="210,45"
           Id="Package\Execute SQL Task - Step 9"
-          TopLeft="28,228" />
+          TopLeft="110,244" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="276,249">
+          TopLeft="213,178">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-31,0"
+              EndConnector="0,66"
               Start="0,0"
-              End="-23.5,0">
+              End="0,58.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-23.5,0" />
+                    End="0,58.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -540,21 +540,21 @@
         <NodeLayout
           Size="210,42"
           Id="Package\Execute SQL Task - Step 10"
-          TopLeft="39,370" />
+          TopLeft="468,245" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="140.25,270">
+          TopLeft="320,266.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,100"
+              EndConnector="148,0"
               Start="0,0"
-              End="0,92.5">
+              End="140.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,92.5" />
+                    End="140.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

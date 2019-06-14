@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">PC2RN3MJ2</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAApwnFxJKRECV0Vnz0zvdYgAAAAACAAAAAAADZgAAwAAAABAAAAAYTHEuhq09Zc0z/x+zNKp5AAAAAASAAACgAAAAEAAAAEwFK/IBlgCkpJgtWWj/X7GIAAAA+FqbURpF9NSrPJkadb74f8oX8eH+ECWWu7WENeGF7pKDyKH/InitbrAooe8jDvw/KxN8dFBCKpFEYHe4Il4CQiE0yBml6/rTPwMjUQFRUphgn28QIJV2vLtFVHXBYw7QbNuCs7PbVjIjF9dP3LRbjc4ib2gLTqDoQycgbvxq25OQJcWzXqDwxBQAAADtdutzlNAZIo0gPwiO3rbtrCpTGw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAApwnFxJKRECV0Vnz0zvdYgAAAAACAAAAAAADZgAAwAAAABAAAADWyg7B6cuNa5+oYKx/3uBBAAAAAASAAACgAAAAEAAAAGV2p+g1pTAWSzFU5+YCQn+IAAAAoTFjjhdwLfSrTVRPmIdP5qi8s7+CgDzcITXyA4nldFqNotqRSOdiMqhgf0Z/RDZv1/7HOptpZc4nUfZ5CKB+rQ6IiayO1DBWCOVohojHxL/20BrfC46Al6e8k85VWvA4SkNcKFJFCo2LWRgJSCLSO4cGrZAUZGKaMRaCLsvnn+mT6xmPz+67/hQAAABqPkHfchKiQerxtSiMAKKPS0YH+Q==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -34,7 +34,6 @@
           <SSIS:Package SSIS:Name="Live_DebtBreakDown.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_CRM_Asbestos.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_CRM_Warranty.dtsx" SSIS:EntryPoint="1" />
-          <SSIS:Package SSIS:Name="Live_CRM_Lookups.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_CRM_TenancyFormer.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_CRM_PersonDIS.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_CRM_PersonVulCurrToKeep.dtsx" SSIS:EntryPoint="1" />
@@ -44,6 +43,7 @@
           <SSIS:Package SSIS:Name="Live_CRM_Property.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_CRM_TenancyDebt.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Live_DynamicsStaging.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="Live_CRM_Lookup.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="Insight_Insight.livedynamics.conmgr" />
@@ -656,23 +656,6 @@
               </SSIS:Properties>
               <SSIS:Parameters />
             </SSIS:PackageMetaData>
-            <SSIS:PackageMetaData SSIS:Name="Live_CRM_Lookups.dtsx">
-              <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{3FBE242C-9D7D-4DE4-A9E8-22B875F42C68}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">Live_CRM_Lookups</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionComments">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{7CBAC893-37A1-4D61-8454-A738EBD0306E}</SSIS:Property>
-                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
-                <SSIS:Property SSIS:Name="Description">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
-              </SSIS:Properties>
-              <SSIS:Parameters />
-            </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Live_CRM_TenancyFormer.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{386DFE3D-41E6-4CB9-87D3-33A39E0B4676}</SSIS:Property>
@@ -1006,6 +989,23 @@
                   </SSIS:Properties>
                 </SSIS:Parameter>
               </SSIS:Parameters>
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="Live_CRM_Lookup.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{206147AC-3BCE-4A3A-930A-9C7310BF655C}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Live_CRM_Lookup</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{50527809-80D9-4459-B318-C5146319B906}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
             </SSIS:PackageMetaData>
           </SSIS:PackageInfo>
         </SSIS:DeploymentInfo>
