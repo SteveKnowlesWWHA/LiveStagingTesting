@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Live_CRM_PersonContactAdd"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{038B0CCE-C817-4228-95D4-91B043B19A24}">
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{B8AC4D03-CD2A-4712-949C-7F131EFDE19E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -132,6 +132,14 @@
           Size="204,42"
           Id="Package\Execute SQL Task - Step 1"
           TopLeft="347,160" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 2"
+          TopLeft="631,287" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Execute SQL Task - Step 3"
+          TopLeft="794,446" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="228,99">
@@ -166,10 +174,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="204,42"
-          Id="Package\Execute SQL Task - Step 2"
-          TopLeft="631,287" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="449,202">
@@ -204,10 +208,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="204,42"
-          Id="Package\Execute SQL Task - Step 3"
-          TopLeft="794,446" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="733,329">

@@ -11,8 +11,8 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Live_DebtBreakDown"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{7EF3AD53-7012-488F-AC0D-8D1E8673DE2E}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{80F1EF11-0D9D-4CE0-A02B-03F38045140F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -692,6 +692,256 @@
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Tenancy Ref&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Tenancy Ref&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tenancy Ref]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tenancy Ref&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Tncy Sts&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Tncy Sts&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tncy Sts]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tncy Sts&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Tncy Type&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Tncy Type&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tncy Type]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tncy Type&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Rent Group&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Rent Group&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Rent Group]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Rent Group&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Arrs Stage&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Arrs Stage&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Arrs Stage]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Arrs Stage&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Net Rent&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Net Rent&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Net Rent]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Net Rent&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Gross Rent&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Gross Rent&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gross Rent]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Gross Rent&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Primary Arrs&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Primary Arrs&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Primary Arrs]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Primary Arrs&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Unpaid HB&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Unpaid HB&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Unpaid HB]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Unpaid HB&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Tenant SP Cont&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Tenant SP Cont&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tenant SP Cont]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Tenant SP Cont&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Est SP Grant&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Est SP Grant&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Est SP Grant]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Est SP Grant&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Other PSP Arrs&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Other PSP Arrs&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Other PSP Arrs]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other PSP Arrs&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Sec Arrears&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Sec Arrears&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sec Arrears]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Sec Arrears&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Other Sec Arrs&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Other Sec Arrs&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Other Sec Arrs]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other Sec Arrs&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Sundry Debt&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Sundry Debt&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sundry Debt]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Sundry Debt&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Unalloc Inc&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Unalloc Inc&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Unalloc Inc]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Unalloc Inc&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Total Tncy Debt&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Total Tncy Debt&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Total Tncy Debt]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Total Tncy Debt&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;MOP&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;MOP&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MOP]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;MOP&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Scheme&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Scheme&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Scheme]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Scheme&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Mgt Area&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Mgt Area&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Mgt Area]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Mgt Area&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Location Ref&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Location Ref&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location Ref]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Location Ref&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Arrs Officer&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Arrs Officer&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Arrs Officer]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Arrs Officer&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Prev Arrs Stage&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Prev Arrs Stage&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Prev Arrs Stage]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Prev Arrs Stage&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Court Entry Fee&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Court Entry Fee&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Court Entry Fee]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Court Entry Fee&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Court Warrrant&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Court Warrrant&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Court Warrrant]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Court Warrrant&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Major Repair Recharge&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Major Repair Recharge&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Major Repair Recharge]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Major Repair Recharge&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Repairs Recharge&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Repairs Recharge&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Repairs Recharge]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Repairs Recharge&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Other SD&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Other SD&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Other SD]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Other SD&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;SD Bfwd&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;SD Bfwd&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SD Bfwd]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;SD Bfwd&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Weeks in Arrears&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Weeks in Arrears&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Weeks in Arrears]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Weeks in Arrears&quot;]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Gross Arrears&quot;]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="&quot;Gross Arrears&quot;"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gross Arrears]"
+                      lineageId="Package\Data Flow Task\Source - Debt_Breakdown_CSV.Outputs[Flat File Source Output].Columns[&quot;Gross Arrears&quot;]" />
+                  </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
@@ -1878,6 +2128,10 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="484,340" />
+        <NodeLayout
           Size="289,42"
           Id="Package\Execute SQL Task - Debt_BreakDown Step 0"
           TopLeft="40,30" />
@@ -1919,10 +2173,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="151,42"
-          Id="Package\Data Flow Task"
-          TopLeft="484,340" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="368.5,216">
@@ -1966,13 +2216,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="226,42"
-          Id="Package\Data Flow Task\Source - Debt_Breakdown_CSV"
-          TopLeft="153,72" />
-        <NodeLayout
           Size="171,42"
           Id="Package\Data Flow Task\OLE DB Destination"
           TopLeft="263,222" />
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Data Flow Task\Source - Debt_Breakdown_CSV"
+          TopLeft="153,72" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Flat File Source Output]"
           TopLeft="266,114">
